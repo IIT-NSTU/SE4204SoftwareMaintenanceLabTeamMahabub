@@ -5,7 +5,6 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
-import java.util.stream.IntStream;
 
 public class Sidebar extends JPanel {
     private final JLabel developer_sign_label = new JLabel();
@@ -14,10 +13,8 @@ public class Sidebar extends JPanel {
     private final JScrollPane menuHolderScrollPane = new JScrollPane();
     private final JPanel menuHolder = new JPanel();
 
-    ArrayList<JPanel> menuPanels = new ArrayList<>();
-    ArrayList<JLabel> menuLabels = new ArrayList<>();
-    ArrayList<JPanel> bodyPanels = new ArrayList<>();
-
+    ArrayList<MenuItem> menuItems = new ArrayList<>();
+    ArrayList<ContentPanel> containerPanels = new ArrayList<>();
 
     Color active_menu_color = new Color(255, 255, 153);
     Font active_menu_font = new Font("Segoe UI", Font.BOLD, 15);
@@ -25,65 +22,19 @@ public class Sidebar extends JPanel {
     Font normal_menu_font = new Font("Segoe UI", Font.BOLD, 14);
     Cursor pointer = new Cursor(Cursor.HAND_CURSOR);
 
-
-    public void addMenu(String name, ImageIcon icon, JPanel mainPanel) {
-        JPanel menuPanel = new JPanel();
-        JLabel menuIcon = new JLabel();
-        JLabel menuLabel = new JLabel();
-
-        menuPanel.setBackground(new Color(64, 43, 100));
-        menuPanel.addMouseListener(new MouseAdapter() {
-            public void mouseClicked(MouseEvent evt) {
-                menuMouseClicked(evt);
-            }
-
-            public void mouseEntered(MouseEvent evt) {
-                menuMouseEntered(evt);
-            }
-
-            public void mouseExited(MouseEvent evt) {
-                menuMouseExited(evt);
-            }
-        });
-
-
-        menuIcon.setHorizontalAlignment(SwingConstants.CENTER);
-        menuIcon.setIcon(icon);
-
-        menuLabel.setFont(normal_menu_font);
-        menuLabel.setForeground(new Color(221, 221, 221));
-        menuLabel.setText(name);
-
-
-        GroupLayout menuPanelLayout = new GroupLayout(menuPanel);
-        menuPanel.setLayout(menuPanelLayout);
-        menuPanelLayout.setHorizontalGroup(
-                menuPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                        .addGroup(menuPanelLayout.createSequentialGroup()
-                                .addGap(22, 22, 22)
-                                .addComponent(menuIcon, GroupLayout.PREFERRED_SIZE, 34, GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(menuLabel)
-                                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        menuPanelLayout.setVerticalGroup(
-                menuPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                        .addComponent(menuIcon, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
-                        .addComponent(menuLabel, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-
-
-        this.menuPanels.add(menuPanel);
-        this.bodyPanels.add(mainPanel);
-        this.menuLabels.add(menuLabel);
+    public void addMenuFromContentPanels(ArrayList<ContentPanel> containerPanels) {
+        this.containerPanels = containerPanels;
+        for (ContentPanel panel : containerPanels) {
+            this.menuItems.add(new MenuItem(panel));
+        }
+        build();
     }
 
     //after adding all menus, this method must be called to create a sidebar.
-    public void build() {
+    private void build() {
         initComponent();
         setComponentLayout();
     }
-
 
     private void initComponent() {
         this.setBackground(new Color(54, 33, 89));
@@ -98,46 +49,47 @@ public class Sidebar extends JPanel {
         logoPanel.setHorizontalAlignment(SwingConstants.CENTER);
         logoPanel.setText("ChemCal");
 
-
         developer_sign_label.setFont(new Font("Segoe UI", Font.BOLD, 12));
         developer_sign_label.setForeground(new Color(221, 221, 221));
         developer_sign_label.setHorizontalAlignment(SwingConstants.CENTER);
         developer_sign_label.setText("Developed by - HumbleFooL");
     }
 
-    private void setComponentLayout() {
-        GroupLayout menuHolderLayout = new GroupLayout(menuHolder);
-        menuHolder.setLayout(menuHolderLayout);
+    private LayoutManager getMenuItemHolderLayout(Container container) {
+        GroupLayout menuHolderLayout = new GroupLayout(container);
 
         GroupLayout.ParallelGroup parallelGroup = menuHolderLayout.createParallelGroup(GroupLayout.Alignment.LEADING);
-        menuPanels.forEach(eachPanel -> parallelGroup.addComponent(eachPanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE));
+        menuItems.forEach(menuItem -> parallelGroup.addComponent(menuItem, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE));
         menuHolderLayout.setHorizontalGroup(parallelGroup);
 
         GroupLayout.SequentialGroup sequentialGroup = menuHolderLayout.createSequentialGroup();
-        menuPanels.forEach(eachPanel -> sequentialGroup.addComponent(eachPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        menuItems.forEach(menuItem -> sequentialGroup.addComponent(menuItem, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0));
         menuHolderLayout.setVerticalGroup(
                 menuHolderLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                         .addGroup(sequentialGroup)
         );
 
-        //main layout
-        GroupLayout sidebar_panelLayout = new GroupLayout(this);
-        this.setLayout(sidebar_panelLayout);
-        sidebar_panelLayout.setHorizontalGroup(
-                sidebar_panelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+        return menuHolderLayout;
+    }
+
+    private LayoutManager getSidebarLayout(Container container) {
+        GroupLayout sidebarLayout = new GroupLayout(container);
+
+        sidebarLayout.setHorizontalGroup(
+                sidebarLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                         .addComponent(developer_sign_label, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(menuHolderScrollPane)
-                        .addGroup(sidebar_panelLayout.createSequentialGroup()
+                        .addGroup(sidebarLayout.createSequentialGroup()
                                 .addGap(20, 20, 20)
-                                .addGroup(sidebar_panelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                                .addGroup(sidebarLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                                         .addComponent(logoPanel, GroupLayout.PREFERRED_SIZE, 230, GroupLayout.PREFERRED_SIZE)
                                         .addComponent(logoSeparator, GroupLayout.PREFERRED_SIZE, 230, GroupLayout.PREFERRED_SIZE))
                                 .addGap(0, 8, Short.MAX_VALUE))
         );
-        sidebar_panelLayout.setVerticalGroup(
-                sidebar_panelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                        .addGroup(sidebar_panelLayout.createSequentialGroup()
+        sidebarLayout.setVerticalGroup(
+                sidebarLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                        .addGroup(sidebarLayout.createSequentialGroup()
                                 .addGap(40, 40, 40)
                                 .addComponent(logoPanel)
                                 .addGap(18, 18, 18)
@@ -147,32 +99,93 @@ public class Sidebar extends JPanel {
                                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(developer_sign_label, GroupLayout.PREFERRED_SIZE, 26, GroupLayout.PREFERRED_SIZE))
         );
+        return sidebarLayout;
     }
 
-    private void menuMouseClicked(MouseEvent evt) {
-        //when a certain menu is clicked , corresponding bodyPanel will be visible.
-        IntStream.range(0, menuPanels.size()).forEach(i -> {
-            if (evt.getSource().equals(menuPanels.get(i))) {
-                bodyPanels.get(i).setVisible(true);
-                menuLabels.get(i).setForeground(active_menu_color);
-                menuLabels.get(i).setFont(active_menu_font);
+    private void setComponentLayout() {
+        menuHolder.setLayout(getMenuItemHolderLayout(menuHolder));
+        this.setLayout(getSidebarLayout(this));
+    }
 
-            } else {
-                bodyPanels.get(i).setVisible(false);
-                menuLabels.get(i).setForeground(normal_menu_color);
-                menuLabels.get(i).setFont(normal_menu_font);
+    private class MenuItem extends JPanel {
+        public static final Color MENU_ITEM_BACKGROUND_COLOR = new Color(64, 43, 100);
+
+        private final JLabel label = new JLabel();
+        private final JLabel icon = new JLabel();
+        private JPanel targetPanel;
+
+        public MenuItem(ContentPanel targetPanel) {
+            this(targetPanel.getTitle(), targetPanel.getIconName(), targetPanel);
+        }
+
+        public MenuItem(String name, String iconName, JPanel targetPanel) {
+            setBackground(MENU_ITEM_BACKGROUND_COLOR);
+            addMouseListener(new MouseAdapter() {
+                public void mouseClicked(MouseEvent evt) {
+                    menuMouseClicked(evt);
+                }
+
+                public void mouseEntered(MouseEvent evt) {
+                    menuMouseEntered(evt);
+                }
+
+                public void mouseExited(MouseEvent evt) {
+                    menuMouseExited(evt);
+                }
+            });
+
+            icon.setHorizontalAlignment(SwingConstants.CENTER);
+            icon.setIcon(new ImageIcon(getClass().getResource("/ChemistryCalculator/icons/" + iconName)));
+
+            label.setFont(normal_menu_font);
+            label.setForeground(new Color(221, 221, 221));
+            label.setText(name);
+
+            setLayout(getMenuItemLayout(this));
+        }
+
+        private GroupLayout getMenuItemLayout(Container container) {
+            GroupLayout menuPanelLayout = new GroupLayout(container);
+            menuPanelLayout.setHorizontalGroup(
+                    menuPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                            .addGroup(menuPanelLayout.createSequentialGroup()
+                                    .addGap(22, 22, 22)
+                                    .addComponent(icon, GroupLayout.PREFERRED_SIZE, 34, GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(label)
+                                    .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            );
+            menuPanelLayout.setVerticalGroup(
+                    menuPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                            .addComponent(icon, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
+                            .addComponent(label, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            );
+            return menuPanelLayout;
+        }
+
+        private void menuMouseClicked(MouseEvent evt) {
+            //when a certain menu is clicked , corresponding bodyPanel will be visible.
+            for (MenuItem panel : menuItems) {
+                if (panel.equals(evt.getSource())) {
+                    panel.targetPanel.setVisible(true);
+                    panel.setForeground(active_menu_color);
+                    panel.setFont(active_menu_font);
+                } else {
+                    panel.targetPanel.setVisible(false);
+                    panel.setForeground(normal_menu_color);
+                    panel.setFont(normal_menu_font);
+                }
             }
-        });
+        }
+
+        private void menuMouseEntered(MouseEvent evt) {
+            this.setBackground(new Color(85, 65, 118));
+            this.setCursor(pointer);
+        }
+
+        private void menuMouseExited(MouseEvent evt) {
+            this.setBackground(new Color(64, 43, 100));
+        }
     }
 
-    private void menuMouseEntered(MouseEvent evt) {
-        JPanel getPanel = (JPanel) evt.getSource();
-        getPanel.setBackground(new Color(85, 65, 118));
-        getPanel.setCursor(pointer);
-    }
-
-    private void menuMouseExited(MouseEvent evt) {
-        JPanel getPanel = (JPanel) evt.getSource();
-        getPanel.setBackground(new Color(64, 43, 100));
-    }
 }

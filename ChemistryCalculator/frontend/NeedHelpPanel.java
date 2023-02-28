@@ -3,7 +3,7 @@ package ChemistryCalculator.frontend;
 import javax.swing.*;
 import java.awt.*;
 
-public class NeedHelpPanel extends JPanel {
+public class NeedHelpPanel extends ContentPanel {
     private final JPanel contentHolderPanel = new JPanel();
     private final JScrollPane contentHolderScrollPane = new JScrollPane();
 
@@ -24,6 +24,7 @@ public class NeedHelpPanel extends JPanel {
     private final JSeparator titrationSeparator = new JSeparator();
 
     public NeedHelpPanel() {
+        super("Need help ?", "icons8_inquiry_25px_1.png");
         initComponent();
         setComponentLayout();
     }

@@ -9,7 +9,7 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class PercentOfCompletionPanel extends JPanel {
+public class PercentOfCompletionPanel extends ContentPanel {
     private static final Font SEGOE_UI = new Font("Segoe UI", Font.BOLD, 14);
     private static final Color MAIN_COLOR = new Color(64, 43, 100);
     private static final Color GRAY = new Color(204, 204, 204);
@@ -31,6 +31,7 @@ public class PercentOfCompletionPanel extends JPanel {
     private DefaultTableModel dataTableModel;
 
     public PercentOfCompletionPanel() {
+        super("Percent of completion", "icons8_percentage_25px.png");
         initComponent();
         setComponentLayout();
     }

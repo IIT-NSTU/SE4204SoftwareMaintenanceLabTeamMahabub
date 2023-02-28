@@ -10,7 +10,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.util.Arrays;
 
-public class MolarMassPanel extends JPanel {
+public class MolarMassPanel extends ContentPanel {
     private static final Font SEGOE_UI = new Font("Segoe UI", Font.BOLD, 14);
     private static final Color MAIN_COLOR = new Color(64, 43, 100);
     private static final Color GRAY = new Color(204, 204, 204);
@@ -36,6 +36,7 @@ public class MolarMassPanel extends JPanel {
 
 
     public MolarMassPanel() {
+        super("Molar mass", "icons8_weightlifting_25px.png");
         initComponent();
         setComponentLayout();
     }

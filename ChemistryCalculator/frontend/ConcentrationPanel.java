@@ -8,12 +8,11 @@ import ChemistryCalculator.backend.InvalidAtomException;
 import javax.swing.*;
 import java.awt.*;
 
-public class ConcentrationPanel extends JPanel {
+public class ConcentrationPanel extends ContentPanel {
     private static final Font SEGOE_UI = new Font("Segoe UI", Font.BOLD, 14);
     private static final Color MAIN_COLOR = new Color(64, 43, 100);
     private static final Color MAIN_COLOR_LITE = new Color(85, 65, 118);
     private static final Color GRAY = new Color(204, 204, 204);
-
 
     private final JPanel errorMessagePanel = new JPanel();
     private final JLabel errorMessageLabel = new JLabel();
@@ -50,8 +49,8 @@ public class ConcentrationPanel extends JPanel {
     private final JLabel normalityAnsLabel = new JLabel();
     private final JLabel molarityAnsLabel = new JLabel();
 
-
     public ConcentrationPanel() {
+        super("Concentration", "icons8_dna_helix_25px.png");
         initComponent();
         setComponentLayout();
     }

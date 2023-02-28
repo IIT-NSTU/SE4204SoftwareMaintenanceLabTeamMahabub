@@ -10,7 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ItemEvent;
 
 
-public class TitrationPanel extends JPanel {
+public class TitrationPanel extends ContentPanel {
 
     private static final Font SEGOE_UI = new Font("Segoe UI", Font.BOLD, 14);
     private static final Color MAIN_COLOR = new Color(64, 43, 100);
@@ -54,6 +54,7 @@ public class TitrationPanel extends JPanel {
     String baseVolumeNewItem = null;
 
     public TitrationPanel() {
+        super("Titration", "icons8_test_tube_25px.png");
         initComponent();
         setComponentLayout();
     }

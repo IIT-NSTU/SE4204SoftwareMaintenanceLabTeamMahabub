@@ -15,16 +15,16 @@ public class Home extends JFrame {
 
 
     // Available body panels
-    private final JPanel equationBalancePanel = new EquationBalancePanel();
-    private final JPanel concentrationPanel = new ConcentrationPanel();
-    private final JPanel molarMassPanel = new MolarMassPanel();
-    private final JPanel electronConfigPanel = new ElectronConfigPanel();
-    private final JPanel needHelpPanel = new NeedHelpPanel();
-    private final JPanel percentOfCompletionPanel = new PercentOfCompletionPanel();
-    private final JPanel titrationPanel = new TitrationPanel();
+    private final ContentPanel equationBalancePanel = new EquationBalancePanel();
+    private final ContentPanel concentrationPanel = new ConcentrationPanel();
+    private final ContentPanel molarMassPanel = new MolarMassPanel();
+    private final ContentPanel electronConfigPanel = new ElectronConfigPanel();
+    private final ContentPanel needHelpPanel = new NeedHelpPanel();
+    private final ContentPanel percentOfCompletionPanel = new PercentOfCompletionPanel();
+    private final ContentPanel titrationPanel = new TitrationPanel();
 
     public Home() {
-        ArrayList<JPanel> bodyPanels = new ArrayList<>(
+        ArrayList<ContentPanel> bodyPanels = new ArrayList<>(
                 List.of(equationBalancePanel, concentrationPanel, electronConfigPanel, molarMassPanel, percentOfCompletionPanel, titrationPanel, needHelpPanel)
         );
 
@@ -35,30 +35,15 @@ public class Home extends JFrame {
         setupFrameProperties();
     }
 
-    private void initializeBodyPanelLayout(ArrayList<JPanel> bodyPanels) {
+    private void initializeBodyPanelLayout(ArrayList<ContentPanel> bodyPanels) {
         bodyPanel.setLayout(new CardLayout());
-        for (JPanel panel : bodyPanels) {
+        for (ContentPanel panel : bodyPanels) {
             bodyPanel.add(panel);
         }
     }
 
-    private void initializeSidebar(ArrayList<JPanel> bodyPanels) {
-        ArrayList<String> titles = new ArrayList<>(
-                List.of("Equation Balance", "Concentration", "Electron config", "Molar mass", "Percent of completion", "Titration", "Need help ?")
-        );
-
-        ArrayList<String> icons = new ArrayList<>(
-                List.of(
-                        "icons8_scales_25px_1.png", "icons8_dna_helix_25px.png", "icons8_physics_25px.png", "icons8_weightlifting_25px.png",
-                        "icons8_percentage_25px.png", "icons8_test_tube_25px.png", "icons8_inquiry_25px_1.png"
-                )
-        );
-
-        for (int i = 0; i < bodyPanels.size(); i++) {
-            sidebarPanel.addMenu(titles.get(i), new ImageIcon(getClass().getResource("/ChemistryCalculator/icons/" + icons.get(i))), bodyPanels.get(i));
-        }
-
-        sidebarPanel.build();
+    private void initializeSidebar(ArrayList<ContentPanel> bodyPanels) {
+        sidebarPanel.addMenuFromContentPanels(bodyPanels);
     }
 
     /**

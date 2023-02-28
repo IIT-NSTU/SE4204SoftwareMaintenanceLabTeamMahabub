@@ -10,7 +10,7 @@ import java.awt.*;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-public class EquationBalancePanel extends JPanel {
+public class EquationBalancePanel extends ContentPanel {
     private static final Font SEGOE_UI = new Font("Segoe UI", Font.BOLD, 14);
     private static final Color MAIN_COLOR = new Color(64, 43, 100);
     private static final Color MAIN_COLOR_LITE = new Color(85, 65, 118);
@@ -38,6 +38,7 @@ public class EquationBalancePanel extends JPanel {
 
 
     public EquationBalancePanel() {
+        super("Equation Balance", "icons8_scales_25px_1.png");
         initComponent();
         setComponentLayout();
     }

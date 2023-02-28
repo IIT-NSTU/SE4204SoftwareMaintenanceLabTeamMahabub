@@ -7,7 +7,7 @@ import ChemistryCalculator.backend.InvalidAtomException;
 import javax.swing.*;
 import java.awt.*;
 
-public class ElectronConfigPanel extends JPanel {
+public class ElectronConfigPanel extends ContentPanel {
 
     private final JButton getElectronConfigButton = new JButton();
     private final JButton clearButton = new JButton();
@@ -31,6 +31,7 @@ public class ElectronConfigPanel extends JPanel {
     private final JLabel ElectronConfigAnsLabel = new JLabel();
 
     public ElectronConfigPanel() {
+        super("Electron config", "icons8_physics_25px.png");
         initComponent();
         setComponentLayout();
     }
