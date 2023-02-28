@@ -22,7 +22,7 @@ public class Sidebar extends JPanel {
     Color active_menu_color = new Color(255, 255, 153);
     Font active_menu_font = new Font("Segoe UI", Font.BOLD, 15);
     Color normal_menu_color = new Color(221, 221, 221);
-    Font normal_menu_font = new Font("Segoe UI", Font.BOLD,  14);
+    Font normal_menu_font = new Font("Segoe UI", Font.BOLD, 14);
     Cursor pointer = new Cursor(Cursor.HAND_CURSOR);
 
 
@@ -106,27 +106,20 @@ public class Sidebar extends JPanel {
     }
 
     private void setComponentLayout() {
-
-
         GroupLayout menuHolderLayout = new GroupLayout(menuHolder);
         menuHolder.setLayout(menuHolderLayout);
+
         GroupLayout.ParallelGroup parallelGroup = menuHolderLayout.createParallelGroup(GroupLayout.Alignment.LEADING);
-
         menuPanels.forEach(eachPanel -> parallelGroup.addComponent(eachPanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE));
-
-
         menuHolderLayout.setHorizontalGroup(parallelGroup);
 
         GroupLayout.SequentialGroup sequentialGroup = menuHolderLayout.createSequentialGroup();
-
         menuPanels.forEach(eachPanel -> sequentialGroup.addComponent(eachPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0));
-
         menuHolderLayout.setVerticalGroup(
                 menuHolderLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                         .addGroup(sequentialGroup)
         );
-
 
         //main layout
         GroupLayout sidebar_panelLayout = new GroupLayout(this);
@@ -141,7 +134,6 @@ public class Sidebar extends JPanel {
                                         .addComponent(logoPanel, GroupLayout.PREFERRED_SIZE, 230, GroupLayout.PREFERRED_SIZE)
                                         .addComponent(logoSeparator, GroupLayout.PREFERRED_SIZE, 230, GroupLayout.PREFERRED_SIZE))
                                 .addGap(0, 8, Short.MAX_VALUE))
-
         );
         sidebar_panelLayout.setVerticalGroup(
                 sidebar_panelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
@@ -155,11 +147,9 @@ public class Sidebar extends JPanel {
                                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(developer_sign_label, GroupLayout.PREFERRED_SIZE, 26, GroupLayout.PREFERRED_SIZE))
         );
-
     }
 
     private void menuMouseClicked(MouseEvent evt) {
-        // TODO add your handling code here:
         //when a certain menu is clicked , corresponding bodyPanel will be visible.
         IntStream.range(0, menuPanels.size()).forEach(i -> {
             if (evt.getSource().equals(menuPanels.get(i))) {
@@ -173,21 +163,16 @@ public class Sidebar extends JPanel {
                 menuLabels.get(i).setFont(normal_menu_font);
             }
         });
-
-
     }
 
     private void menuMouseEntered(MouseEvent evt) {
-        // TODO add your handling code here:
         JPanel getPanel = (JPanel) evt.getSource();
         getPanel.setBackground(new Color(85, 65, 118));
         getPanel.setCursor(pointer);
     }
 
     private void menuMouseExited(MouseEvent evt) {
-        // TODO add your handling code here:
         JPanel getPanel = (JPanel) evt.getSource();
         getPanel.setBackground(new Color(64, 43, 100));
-
     }
 }

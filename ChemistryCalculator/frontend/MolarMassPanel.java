@@ -11,9 +11,9 @@ import java.awt.event.ActionEvent;
 import java.util.Arrays;
 
 public class MolarMassPanel extends JPanel {
-    private static final Font SEGOE_UI = new Font("Segoe UI", Font.BOLD,  14);
-    private static final Color MAIN_COLOR = new Color(64, 43,  100);
-    private static final Color GRAY = new Color(204, 204,  204);
+    private static final Font SEGOE_UI = new Font("Segoe UI", Font.BOLD, 14);
+    private static final Color MAIN_COLOR = new Color(64, 43, 100);
+    private static final Color GRAY = new Color(204, 204, 204);
 
     private final JLabel labelForCompoundTextfield = new JLabel();
     private final JTextField compoundTextfield = new JTextField();
@@ -22,7 +22,7 @@ public class MolarMassPanel extends JPanel {
     private final JButton clearButton = new JButton();
 
     private final JLabel errorMessageLabel = new JLabel();
-    private final JPanel errorMessagePanel= new JPanel();
+    private final JPanel errorMessagePanel = new JPanel();
 
     private final JLabel additionalText1 = new JLabel();
     private final JLabel additionalText2 = new JLabel();
@@ -30,11 +30,9 @@ public class MolarMassPanel extends JPanel {
 
     private final JLabel compoundAnsLabel = new JLabel();
     private final JLabel massAnsLabel = new JLabel();
-
     private final JTable ansTable = new JTable();
-    private DefaultTableModel dataTableModel;
     private final JScrollPane ansTableScrollPane = new JScrollPane();
-
+    private DefaultTableModel dataTableModel;
 
 
     public MolarMassPanel() {
@@ -42,8 +40,7 @@ public class MolarMassPanel extends JPanel {
         setComponentLayout();
     }
 
-    private void  initComponent() {
-
+    private void initComponent() {
         labelForCompoundTextfield.setFont(SEGOE_UI);
         labelForCompoundTextfield.setForeground(MAIN_COLOR);
         labelForCompoundTextfield.setText("Enter Compound :");
@@ -56,10 +53,10 @@ public class MolarMassPanel extends JPanel {
                 new Object[][]{},
                 new String[]{}
         ) {
-            Class[] types = new Class[]{
+            final Class[] types = new Class[]{
                     String.class, String.class
             };
-            boolean[] canEdit = new boolean[]{
+            final boolean[] canEdit = new boolean[]{
                     false, false
             };
 
@@ -203,14 +200,13 @@ public class MolarMassPanel extends JPanel {
                                 .addGap(29, 29, 29))
         );
     }
+
     private void molarMassButtonActionPerformed(ActionEvent evt) {
-        // TODO add your handling code here:
         String compoundText = compoundTextfield.getText();
         if (!compoundText.isEmpty()) {
             Compound compound;
             try {
                 compound = new Compound(compoundText);
-
             } catch (InvalidAtomException e) {
                 errorMessagePanel.setVisible(true);
                 errorMessageLabel.setText(e.getMessage());
@@ -223,7 +219,6 @@ public class MolarMassPanel extends JPanel {
                 ansTableScrollPane.setVisible(false);
                 return;
             }
-
 
             Atom[] atomList = compound.getAtomList();
             String[] tableHeader = new String[]{"Name", "Atomic mass"};
@@ -256,7 +251,6 @@ public class MolarMassPanel extends JPanel {
     }
 
     private void molerMassClearButtonActionPerformed(ActionEvent evt) {
-        // TODO add your handling code here:
         errorMessagePanel.setVisible(false);
         compoundTextfield.setText(null);
         additionalText1.setVisible(false);
@@ -265,6 +259,5 @@ public class MolarMassPanel extends JPanel {
         massAnsLabel.setVisible(false);
         additionalText3.setVisible(false);
         ansTableScrollPane.setVisible(false);
-
     }
 }

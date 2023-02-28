@@ -36,7 +36,8 @@ public class Home extends JFrame {
                     break;
                 }
             }
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException |
+                 UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(Home.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
 
@@ -65,9 +66,7 @@ public class Home extends JFrame {
 
     private void buildBodyPanels() {
         //adding all body panels to a single panel (bodyPanel)
-
         bodyPanel.setLayout(new CardLayout());
-
         bodyPanel.add(equationBalancePanel);
         bodyPanel.add(concentrationPanel);
         bodyPanel.add(molarMassPanel);
@@ -78,8 +77,7 @@ public class Home extends JFrame {
     }
 
     private void buildSidebar() {
-        // creating sidebar. Every single body panel should have a single menu bar for navigation. Don't creates duplicates.
-
+        // creating sidebar. Every single body panel should have a single menu bar for navigation. Don't create duplicates.
         sidebarPanel.addMenu(
                 "Equation Balance",
                 new ImageIcon(getClass().getResource("/ChemistryCalculator/icons/icons8_scales_25px_1.png")),
@@ -116,13 +114,11 @@ public class Home extends JFrame {
                 needHelpPanel
         );
 
-
         sidebarPanel.build();
     }
 
     private void setFrameProperty() {
         //attaching background Panel to the main ContentPane.
-
         GroupLayout layout = new GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -133,7 +129,6 @@ public class Home extends JFrame {
                 layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                         .addComponent(backgroundPanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
-
 
         //setting frame properties
 
@@ -147,5 +142,4 @@ public class Home extends JFrame {
         pack();
         setLocationRelativeTo(null);
     }
-
 }

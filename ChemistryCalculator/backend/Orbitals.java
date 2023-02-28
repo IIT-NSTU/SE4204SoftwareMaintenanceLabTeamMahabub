@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Orbitals {
-    private static ArrayList<Orbital> atomicOrbitals;
+    private static final ArrayList<Orbital> atomicOrbitals;
     static {
         atomicOrbitals = new ArrayList<>(
                 List.of(

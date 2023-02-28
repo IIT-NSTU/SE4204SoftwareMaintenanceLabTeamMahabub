@@ -27,11 +27,9 @@ public class Titration {
     //Executing formula  =>  (numOfMolesOfBase*molarityOfBase*volumeOfBase) = numOfMolesOfAcid*molarityOfAcid*volumeOfAcid)
     public double getUnknownValue() {
         if (this.isValid()) {
-
             double numerator;
             double denominator = 1;
             if (unknownValue_in_Acid) {
-
                 numerator = Arrays.stream(baseProperties).mapToDouble(Double::parseDouble).reduce(1, (a, b) -> a * b);
                 for (String property : acidProperties) {
                     if (!property.isEmpty()) {
@@ -48,13 +46,10 @@ public class Titration {
                 }
 
                 return numerator / denominator;
-
             }
         } else {
             throw new InsufficientDataException("\"Fill up any 5 fields to get unknown value\"");
         }
-
-
     }
 
 

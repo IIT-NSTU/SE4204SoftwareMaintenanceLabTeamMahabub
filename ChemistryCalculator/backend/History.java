@@ -10,8 +10,6 @@ import java.time.format.DateTimeFormatter;
 
 public interface History {
     default void add(String line) throws FileNotFoundException {
-
-
         String PATH = FileSystemView.getFileSystemView().getDefaultDirectory().getPath() + File.separator;
         String directoryName = PATH.concat("Chemistry Calculator");
         String txtFile = "history.txt";
@@ -35,8 +33,6 @@ public interface History {
         LocalDateTime now = LocalDateTime.now();
 
         line = line.concat("    [" + dateTimeFormatter.format(now) +"]");
-
-
         writer.println(line);
         writer.flush();
         writer.close();

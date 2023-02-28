@@ -16,7 +16,6 @@ public class HistoryFrame extends JFrame {
     private static final Font SEGOE_UI = new Font("Segoe UI", Font.BOLD, 14);
     private static final Color MAIN_COLOR = new Color(64, 43, 100);
     private static final Color GRAY = new Color(204, 204, 204);
-    
     private final JPanel mainPanel = new JPanel();
     private final JScrollPane mainScrollPane = new JScrollPane();
     private final JTextArea HistoryTextArea = new JTextArea();
@@ -24,7 +23,6 @@ public class HistoryFrame extends JFrame {
     private final String filePath = FileSystemView.getFileSystemView().getDefaultDirectory().getPath() + File.separator
             + "Chemistry Calculator" + File.separator
             + "history.txt";
-    
 
     public HistoryFrame() throws IOException {
         initComponents();
@@ -60,20 +58,16 @@ public class HistoryFrame extends JFrame {
         layout.setHorizontalGroup(
                 layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                         .addComponent(mainPanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-
         );
         layout.setVerticalGroup(
                 layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                         .addComponent(mainPanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-
         );
     }
-
 
     private void initComponents() {
         mainPanel.setBackground(Color.white);
         mainScrollPane.setBorder(null);
-
 
         HistoryTextArea.setFont(new Font("Segoe UI", Font.PLAIN, 15));
         HistoryTextArea.setLineWrap(true);
@@ -92,15 +86,10 @@ public class HistoryFrame extends JFrame {
             }
         });
 
-
-
         HistoryTextArea.setWrapStyleWord(true);
         HistoryTextArea.setBorder(null);
         HistoryTextArea.setMargin(new Insets(3, 5, 3, 3));
         mainScrollPane.setViewportView(HistoryTextArea);
-
-
-
 
         setVisible(true);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -112,29 +101,24 @@ public class HistoryFrame extends JFrame {
     }
 
     private void clearButtonActionPerformed(ActionEvent actionEvent) throws IOException {
-        File file= new File(filePath);
+        File file = new File(filePath);
         PrintWriter writer = new PrintWriter(file);
         writer.print("");
         writer.close();
         HistoryTextArea.setText("");
-
     }
 
     public void collectHistory() throws IOException {
         //sorting by date & time
-        ArrayList<String> temp =new ArrayList<>();
+        ArrayList<String> temp = new ArrayList<>();
         Files.lines(Paths.get(filePath)).forEach(temp::add);
-        if (temp.isEmpty()){
+        if (temp.isEmpty()) {
             clearButton.setVisible(false);
             return;
         }
-        for(int i=temp.size()-1;i>=0;i--) {
-            HistoryTextArea.append(temp.get(i) +"\n");
+        for (int i = temp.size() - 1; i >= 0; i--) {
+            HistoryTextArea.append(temp.get(i) + "\n");
         }
     }
-
-
-
-
 
 }

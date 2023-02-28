@@ -26,7 +26,6 @@ public class EquationBalancer {
             manager.append(products[i], i + reactants.length, -1);
         }
 
-
         //mapping  ArrayList<ArrayList<Integer>> to int[][] as Matrix class takes int[][].
         int[][] elementsMatrix = manager.getElementMatrix().stream().map(u -> u.stream().mapToInt(i -> i).toArray()).toArray(int[][]::new);
 
@@ -50,11 +49,9 @@ public class EquationBalancer {
                         result.append(balancedCoefficient[i]).append(reactants[i]).append(" + ");
                     }
                 }
-
             }
 
             result.append("= ");
-
 
             for (int i = 0; i < products.length; i++) {
                 if (i == products.length - 1) {
@@ -70,13 +67,10 @@ public class EquationBalancer {
                         result.append(balancedCoefficient[i + reactants.length]).append(products[i]).append(" + ");
                     }
                 }
-
             }
             balancedEquation = result.toString();
-
-
         } else {
-            throw new InvalidEquationException("Error ! given equation is not vaild");
+            throw new InvalidEquationException("Error ! given equation is not valid");
         }
 
         return balancedEquation;

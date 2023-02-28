@@ -1,7 +1,6 @@
 package ChemistryCalculator.backend;
 
 public class Fraction {
-
     private int numerator;
     private int denominator;
 
@@ -85,22 +84,18 @@ public class Fraction {
     }
 
     public boolean isAbsGreaterThan(Fraction fractionTwo) {
-
         double first = Math.abs((double)this.getNumerator() / (double)this.getDenominator());
         double second = Math.abs((double)fractionTwo.getNumerator() / (double)fractionTwo.getDenominator());
         return first > second;
-
     }
 
     public boolean isZero() {
         return this.getNumerator() == 0;
     }
 
-
     public boolean equals(Fraction fractionTwo) {
         return (this.numerator == fractionTwo.numerator && this.denominator == fractionTwo.denominator) ||
                 (this.numerator == -fractionTwo.numerator && this.denominator == -fractionTwo.denominator);
-
     }
 
     //computing the lowest common multiple. Example => (3, 4, 1, 2) == 12
@@ -108,7 +103,6 @@ public class Fraction {
         long lcm = 0, max;
         boolean found;
         if (a.length != 0) {
-
             max = a[0];
             for (long l : a) {
                 if (l > max) {
@@ -135,28 +129,22 @@ public class Fraction {
     //Example => (1/3, 1/4, 1, 3) == (4, 3, 12, 36)
     public static long[] normalize(Fraction[] fraction) {
         long[] result = new long[fraction.length];
-
         long[] denominator = new long[fraction.length];
         for (int i = 0; i < fraction.length; i++) {
-
             denominator[i] = fraction[i].getDenominator();
-
         }
         long lcm = getLCM(denominator);
         for (int i = 0; i < result.length; i++) {
             if (fraction[i].getDenominator() != 0) {
                 result[i] = (lcm / fraction[i].getDenominator()) * fraction[i].getNumerator();
             }
-
         }
 
         return result;
-
     }
 
     @Override
     public String toString() {
-
         return this.denominator == 1 ? Integer.toString(this.numerator) : this.numerator + "/" + this.denominator;
     }
 

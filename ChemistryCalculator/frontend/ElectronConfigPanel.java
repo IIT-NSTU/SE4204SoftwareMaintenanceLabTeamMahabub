@@ -205,7 +205,6 @@ public class ElectronConfigPanel extends JPanel {
     }
 
     private void getElectronConfigButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
         String atom_text = numOrSymbolTextfield.getText();
 
         if (!atom_text.isEmpty()) {
@@ -223,16 +222,11 @@ public class ElectronConfigPanel extends JPanel {
                     ansPanel.setVisible(true);
 
                     errorMessagePanel.setVisible(false);
-
-
                 } catch (InvalidAtomException e) {
                     errorMessageLabel.setText(e.getMessage());
                     errorMessagePanel.setVisible(true);
                     ansPanel.setVisible(false);
-
                 }
-
-
             } catch (NumberFormatException e) {
                 try {
                     atom = AtomDatabase.getAtom(atom_text);
@@ -249,10 +243,7 @@ public class ElectronConfigPanel extends JPanel {
                     errorMessagePanel.setVisible(true);
                     ansPanel.setVisible(false);
                 }
-
             }
-
-
         } else {
             errorMessageLabel.setText("Enter atom's symbol or atomic number!");
             errorMessagePanel.setVisible(true);
@@ -260,9 +251,7 @@ public class ElectronConfigPanel extends JPanel {
         }
     }
 
-
     private void clearButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
         ansPanel.setVisible(false);
         errorMessagePanel.setVisible(false);
         numOrSymbolTextfield.setText(null);

@@ -13,11 +13,9 @@ public class Concentration {
         this.volumeOfSolution = volumeOfSolution;
     }
 
-
     public double getMolarity() {
         return (1000 * givenCompoundMass) / (compound.getMolarMass() * volumeOfSolution);
     }
-
 
     public double getMolality() {
         double massOfSolvent = volumeOfSolution - givenCompoundMass;

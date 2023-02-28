@@ -12,9 +12,9 @@ import java.awt.event.ItemEvent;
 
 public class TitrationPanel extends JPanel {
 
-    private static final Font SEGOE_UI = new Font("Segoe UI", Font.BOLD,  14);
-    private static final Color MAIN_COLOR = new Color(64, 43,  100);
-    private static final Color GRAY = new Color(204, 204,  204);
+    private static final Font SEGOE_UI = new Font("Segoe UI", Font.BOLD, 14);
+    private static final Color MAIN_COLOR = new Color(64, 43, 100);
+    private static final Color GRAY = new Color(204, 204, 204);
 
     private final JLabel labelForAcidMoleTextfield = new JLabel();
     private final JTextField acidMoleTextfield = new JTextField();
@@ -44,6 +44,14 @@ public class TitrationPanel extends JPanel {
 
     private final JLabel notificationLabel = new JLabel();
     private final JPanel notificationPanel = new JPanel();
+    String acidMolarityPreviousItem = null;
+    String acidMolarityNewItem = null;
+    String acidVolumePreviousItem = null;
+    String acidVolumeNewItem = null;
+    String baseMolarityPreviousItem = null;
+    String baseMolarityNewItem = null;
+    String baseVolumePreviousItem = null;
+    String baseVolumeNewItem = null;
 
     public TitrationPanel() {
         initComponent();
@@ -264,33 +272,30 @@ public class TitrationPanel extends JPanel {
     }
 
     private void getUnknownValueButtonActionPerformed(ActionEvent evt) {
-        // TODO add your handling code here:
-      String molarityOfAcid = null, molarityOfBase = null, volumeOfAcid = null, volumeOfBase = null;
+        String molarityOfAcid = null, molarityOfBase = null, volumeOfAcid = null, volumeOfBase = null;
         try {
-
-
-             molarityOfAcid = acidMolarityTextfield.getText().isEmpty() ? acidMolarityTextfield.getText() :
+            molarityOfAcid = acidMolarityTextfield.getText().isEmpty() ? acidMolarityTextfield.getText() :
                     String.valueOf(Converter.convert(acidMolarityUnitComboBox.getSelectedItem().toString(),
                             "molars",
                             Double.parseDouble(acidMolarityTextfield.getText())
                     ));
-             molarityOfBase = baseMolarityTextfield.getText().isEmpty() ? baseMolarityTextfield.getText() :
+            molarityOfBase = baseMolarityTextfield.getText().isEmpty() ? baseMolarityTextfield.getText() :
                     String.valueOf(Converter.convert(baseMolarityUnitComboBox.getSelectedItem().toString(),
                             "molars",
                             Double.parseDouble(baseMolarityTextfield.getText())
                     ));
-             volumeOfAcid = acidVolumeTextfield.getText().isEmpty() ? acidVolumeTextfield.getText() :
+            volumeOfAcid = acidVolumeTextfield.getText().isEmpty() ? acidVolumeTextfield.getText() :
                     String.valueOf(Converter.convert(acidVolumeUnitComboBox.getSelectedItem().toString(),
                             "milliliters",
                             Double.parseDouble(acidVolumeTextfield.getText())
                     ));
 
-             volumeOfBase = baseVolumeTextfield.getText().isEmpty() ? baseVolumeTextfield.getText() :
+            volumeOfBase = baseVolumeTextfield.getText().isEmpty() ? baseVolumeTextfield.getText() :
                     String.valueOf(Converter.convert(baseVolumeUnitComboBox.getSelectedItem().toString(),
                             "milliliters",
                             Double.parseDouble(baseVolumeTextfield.getText())
                     ));
-        }catch (NumberFormatException e) {
+        } catch (NumberFormatException e) {
             notificationLabel.setText("Only numbers are allowed.");
             notificationPanel.setBackground(Color.red);
             notificationPanel.setVisible(true);
@@ -343,7 +348,6 @@ public class TitrationPanel extends JPanel {
         }
         if (acidVolumeTextfield.getText().isEmpty()) {
             try {
-
                 acidVolumeTextfield.setText(
                         String.format("%.5f",
                                 Converter.convert("milliliters",
@@ -411,11 +415,9 @@ public class TitrationPanel extends JPanel {
                 notificationPanel.setVisible(true);
             }
         }
-
     }
 
     private void clearButtonActionPerformed(ActionEvent evt) {
-        // TODO add your handling code here:
         acidMolarityTextfield.setText(null);
         baseMolarityTextfield.setText(null);
         acidVolumeTextfield.setText(null);
@@ -426,29 +428,21 @@ public class TitrationPanel extends JPanel {
         notificationPanel.setVisible(false);
     }
 
-    String acidMolarityPreviousItem = null;
-    String acidMolarityNewItem = null;
     private void acidMolarityUnitComboBoxItemStateChanged(ItemEvent evt) {
-        // TODO add your handling code here:
         String molarityOfAcid = acidMolarityTextfield.getText();
-        if (!molarityOfAcid.isEmpty()){
-            if(evt.getStateChange() == ItemEvent.DESELECTED)
-            {
-                acidMolarityPreviousItem =  evt.getItem().toString();
-            }
-            else if(evt.getStateChange() == ItemEvent.SELECTED)
-            {
-                acidMolarityNewItem =  evt.getItem().toString();
+        if (!molarityOfAcid.isEmpty()) {
+            if (evt.getStateChange() == ItemEvent.DESELECTED) {
+                acidMolarityPreviousItem = evt.getItem().toString();
+            } else if (evt.getStateChange() == ItemEvent.SELECTED) {
+                acidMolarityNewItem = evt.getItem().toString();
             }
         }
     }
 
     private void acidMolarityUnitComboBoxActionPerformed(ActionEvent evt) {
-        // TODO add your handling code here:
         String molarityOfAcid = acidMolarityTextfield.getText();
         String convertedValue;
-        if (!molarityOfAcid.isEmpty() && acidMolarityPreviousItem != null && acidMolarityNewItem !=null) {
-
+        if (!molarityOfAcid.isEmpty() && acidMolarityPreviousItem != null && acidMolarityNewItem != null) {
             try {
                 convertedValue = String.valueOf(Converter.convert(acidMolarityPreviousItem, acidMolarityNewItem, Double.parseDouble(molarityOfAcid)));
             } catch (NumberFormatException e) {
@@ -458,33 +452,24 @@ public class TitrationPanel extends JPanel {
                 return;
             }
             acidMolarityTextfield.setText(convertedValue);
-
         }
     }
 
-    String acidVolumePreviousItem = null;
-    String acidVolumeNewItem = null;
     private void acidVolumeUnitComboBoxItemStateChanged(ItemEvent evt) {
-        // TODO add your handling code here:
         String volumeOfAcid = acidVolumeTextfield.getText();
-        if (!volumeOfAcid.isEmpty()){
-            if(evt.getStateChange() == ItemEvent.DESELECTED)
-            {
-                acidVolumePreviousItem =  evt.getItem().toString();
-            }
-            else if(evt.getStateChange() == ItemEvent.SELECTED)
-            {
-                acidVolumeNewItem =  evt.getItem().toString();
+        if (!volumeOfAcid.isEmpty()) {
+            if (evt.getStateChange() == ItemEvent.DESELECTED) {
+                acidVolumePreviousItem = evt.getItem().toString();
+            } else if (evt.getStateChange() == ItemEvent.SELECTED) {
+                acidVolumeNewItem = evt.getItem().toString();
             }
         }
     }
 
     private void acidVolumeUnitComboBoxActionPerformed(ActionEvent evt) {
-        // TODO add your handling code here:
         String volumeOfAcid = acidVolumeTextfield.getText();
         String convertedValue;
-        if (!volumeOfAcid.isEmpty() && acidVolumePreviousItem != null && acidVolumeNewItem !=null) {
-
+        if (!volumeOfAcid.isEmpty() && acidVolumePreviousItem != null && acidVolumeNewItem != null) {
             try {
                 convertedValue = String.valueOf(Converter.convert(acidVolumePreviousItem, acidVolumeNewItem, Double.parseDouble(volumeOfAcid)));
             } catch (NumberFormatException e) {
@@ -494,33 +479,24 @@ public class TitrationPanel extends JPanel {
                 return;
             }
             acidVolumeTextfield.setText(convertedValue);
-
         }
     }
 
-    String baseMolarityPreviousItem = null;
-    String baseMolarityNewItem = null;
     private void baseMolarityUnitComboBoxItemStateChanged(ItemEvent evt) {
-        // TODO add your handling code here:
         String molarityOfBase = baseMolarityTextfield.getText();
-        if (!molarityOfBase.isEmpty()){
-            if(evt.getStateChange() == ItemEvent.DESELECTED)
-            {
-                baseMolarityPreviousItem =  evt.getItem().toString();
-            }
-            else if(evt.getStateChange() == ItemEvent.SELECTED)
-            {
-                baseMolarityNewItem =  evt.getItem().toString();
+        if (!molarityOfBase.isEmpty()) {
+            if (evt.getStateChange() == ItemEvent.DESELECTED) {
+                baseMolarityPreviousItem = evt.getItem().toString();
+            } else if (evt.getStateChange() == ItemEvent.SELECTED) {
+                baseMolarityNewItem = evt.getItem().toString();
             }
         }
     }
 
     private void baseMolarityUnitComboBoxActionPerformed(ActionEvent evt) {
-        // TODO add your handling code here:
         String molarityOfBase = baseMolarityTextfield.getText();
         String convertedValue;
-        if (!molarityOfBase.isEmpty() && baseMolarityPreviousItem != null && baseMolarityNewItem !=null) {
-
+        if (!molarityOfBase.isEmpty() && baseMolarityPreviousItem != null && baseMolarityNewItem != null) {
             try {
                 convertedValue = String.valueOf(Converter.convert(baseMolarityPreviousItem, baseMolarityNewItem, Double.parseDouble(molarityOfBase)));
             } catch (NumberFormatException e) {
@@ -530,34 +506,24 @@ public class TitrationPanel extends JPanel {
                 return;
             }
             baseMolarityTextfield.setText(convertedValue);
-
         }
     }
 
-    String baseVolumePreviousItem = null;
-    String baseVolumeNewItem = null;
-
     private void baseVolumeUnitComboBoxItemStateChanged(ItemEvent evt) {
-        // TODO add your handling code here:
         String volumeOfBase = baseVolumeTextfield.getText();
-        if (!volumeOfBase.isEmpty()){
-            if(evt.getStateChange() == ItemEvent.DESELECTED)
-            {
-                baseVolumePreviousItem =  evt.getItem().toString();
-            }
-            else if(evt.getStateChange() == ItemEvent.SELECTED)
-            {
-                baseVolumeNewItem =  evt.getItem().toString();
+        if (!volumeOfBase.isEmpty()) {
+            if (evt.getStateChange() == ItemEvent.DESELECTED) {
+                baseVolumePreviousItem = evt.getItem().toString();
+            } else if (evt.getStateChange() == ItemEvent.SELECTED) {
+                baseVolumeNewItem = evt.getItem().toString();
             }
         }
     }
 
     private void baseVolumeUnitComboBoxActionPerformed(ActionEvent evt) {
-        // TODO add your handling code here:
         String volumeOfBase = baseVolumeTextfield.getText();
         String convertedValue;
-        if (!volumeOfBase.isEmpty() && baseVolumePreviousItem != null && baseVolumeNewItem !=null) {
-
+        if (!volumeOfBase.isEmpty() && baseVolumePreviousItem != null && baseVolumeNewItem != null) {
             try {
                 convertedValue = String.valueOf(Converter.convert(baseVolumePreviousItem, baseVolumeNewItem, Double.parseDouble(volumeOfBase)));
             } catch (NumberFormatException e) {
@@ -567,9 +533,6 @@ public class TitrationPanel extends JPanel {
                 return;
             }
             baseVolumeTextfield.setText(convertedValue);
-
         }
     }
-
-
 }

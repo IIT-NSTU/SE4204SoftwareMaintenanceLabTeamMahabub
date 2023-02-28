@@ -20,14 +20,11 @@ public class Formater {
                 int number = Integer.parseInt(group);
                 output.append(segments[i]).append(subScript[number]);
             } else {
-
                 char[] number = group.toCharArray();
                 String result = IntStream.range(0, number.length).mapToObj(j -> subScript[Character.getNumericValue(number[j])]).collect(Collectors.joining());
 
                 output.append(segments[i]).append(result);
             }
-
-
             i++;
         }
 
@@ -35,7 +32,6 @@ public class Formater {
             output.append(segments[i]);
             i++;
         }
-
 
         return output.toString();
     }

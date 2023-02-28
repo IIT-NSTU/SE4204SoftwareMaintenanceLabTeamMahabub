@@ -3,7 +3,6 @@ package ChemistryCalculator.backend;
 import java.util.Arrays;
 
 public class Matrix {
-
     private final Fraction[][] matrix;
     private Fraction[] nullSpaces = null;
 
@@ -29,11 +28,9 @@ public class Matrix {
             for (int j = 0; j < matrix[i].length; j++) {
                 newMatrix[i][j] = new Fraction(matrix[i][j]);
             }
-
         }
         return newMatrix;
     }
-
 
     //Transforming a matrix into Row Echelon Form using Gaussian elimination method
     //A rectangular matrix is in row echelon form if it has the following three properties:
@@ -53,7 +50,6 @@ public class Matrix {
         int j = 0;
 
         while (i < matrix.length && j < matrix[0].length) {
-
             int pivot = i;
             for (int k = i + 1; k < matrix.length; k++) {
                 if (matrix[k][j].isAbsGreaterThan(matrix[pivot][j])) {
@@ -70,7 +66,6 @@ public class Matrix {
 
                 for (int idx = 0; idx < matrix[0].length; idx++) {
                     matrix[i][idx] = matrix[i][idx].divide(div);
-
                 }
 
                 for (int u = i + 1; u < matrix.length; u++) {
@@ -78,7 +73,6 @@ public class Matrix {
                     if (!mult.isZero()) {
                         for (int l = 0; l < matrix[0].length; l++) {
                             matrix[u][l] = matrix[u][l].subtract(mult.multiply(matrix[i][l]));
-
                         }
                     }
                 }
@@ -94,14 +88,12 @@ public class Matrix {
     //The last equation is solved first, then the next-to-last, etc.
 
     private void backSubstitute(int n, Matrix echelonForm) {
-
         for (int i = n - 1; i >= 0; i--) {
             Fraction sum = new Fraction(0);
             for (int j = i + 1; j < echelonForm.getWidth(); j++) {
                 sum = sum.add(echelonForm.matrix[i][j].multiply(echelonForm.nullSpaces[j]));
             }
             echelonForm.nullSpaces[i] = sum.multiply(new Fraction(-1));
-
         }
     }
 
@@ -113,7 +105,6 @@ public class Matrix {
 
     public Fraction[] nullSpace() {
         Matrix echelonFormed = gaussianElimination();
-
         if (echelonFormed.getHeight() > echelonFormed.getWidth()) {
             for (int k = 0; k < echelonFormed.getWidth(); k++) {
                 if (k == echelonFormed.getWidth() - 1 && echelonFormed.matrix[k][k].equals(new Fraction(1))) {
@@ -127,9 +118,7 @@ public class Matrix {
                     backSubstitute(k, echelonFormed);
                     break;
                 }
-
             }
-
         } else if (echelonFormed.getHeight() < echelonFormed.getWidth()) {
             for (int k = 0; k < echelonFormed.getHeight(); k++) {
                 if (k == echelonFormed.getHeight() - 1 && echelonFormed.matrix[k][k].equals(new Fraction(1))) {
@@ -146,7 +135,6 @@ public class Matrix {
                     break;
                 }
             }
-
         } else {
             for (int k = 0; k < echelonFormed.getHeight(); k++) {
                 if (echelonFormed.matrix[k][k].isZero()) {
@@ -159,10 +147,8 @@ public class Matrix {
                     break;
                 }
             }
-
         }
         return echelonFormed.nullSpaces;
-
     }
 
     public Matrix transpose() {

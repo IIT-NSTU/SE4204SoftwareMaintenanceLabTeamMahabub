@@ -10,9 +10,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class PercentOfCompletionPanel extends JPanel {
-    private static final Font SEGOE_UI = new Font("Segoe UI",  Font.BOLD, 14);
-    private static final Color MAIN_COLOR = new Color(64, 43,  100);
-    private static final Color GRAY = new Color(204, 204,  204);
+    private static final Font SEGOE_UI = new Font("Segoe UI", Font.BOLD, 14);
+    private static final Color MAIN_COLOR = new Color(64, 43, 100);
+    private static final Color GRAY = new Color(204, 204, 204);
 
     private final JLabel labelforcompoundTextfield = new JLabel();
     private final JTextField compoundTextfield = new JTextField();
@@ -58,10 +58,10 @@ public class PercentOfCompletionPanel extends JPanel {
                 new Object[][]{},
                 new String[]{}
         ) {
-            Class[] types = new Class[]{
+            final Class[] types = new Class[]{
                     String.class, String.class, String.class, String.class, String.class
             };
-            boolean[] canEdit = new boolean[]{
+            final boolean[] canEdit = new boolean[]{
                     false, false, false, false, false
             };
 
@@ -171,7 +171,6 @@ public class PercentOfCompletionPanel extends JPanel {
     }
 
     private void pcom_ans_buttonActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
         String compound_text = compoundTextfield.getText();
         if (!compound_text.isEmpty()) {
             Compound compound;
@@ -202,11 +201,9 @@ public class PercentOfCompletionPanel extends JPanel {
             dataTableModel.setDataVector(table_row, table_header
             );
 
-
             pieChartButton.setVisible(true);
             ansTableScrollPane.setVisible(true);
             errorMessagePanel.setVisible(false);
-
         } else {
             errorMessagePanel.setVisible(true);
             errorMessageLabel.setText("Please enter a compound.");
@@ -214,12 +211,9 @@ public class PercentOfCompletionPanel extends JPanel {
             pieChartButton.setVisible(false);
             ansTableScrollPane.setVisible(false);
         }
-
-
     }
 
     private void pcom_clear_buttonActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
         ansTableScrollPane.setVisible(false);
         pieChartButton.setVisible(false);
         errorMessagePanel.setVisible(false);
@@ -227,11 +221,9 @@ public class PercentOfCompletionPanel extends JPanel {
     }
 
     private void pcom_pie_chart_buttonActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
         FxPieChart pieChart = new FxPieChart(dataTableModel.getDataVector());
         pieChart.toFront();
         pieChart.requestFocus();
     }
-
 
 }

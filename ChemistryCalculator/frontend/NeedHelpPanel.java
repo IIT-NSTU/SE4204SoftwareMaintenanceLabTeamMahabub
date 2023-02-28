@@ -4,27 +4,24 @@ import javax.swing.*;
 import java.awt.*;
 
 public class NeedHelpPanel extends JPanel {
-
     private final JPanel contentHolderPanel = new JPanel();
     private final JScrollPane contentHolderScrollPane = new JScrollPane();
 
-    private final JLabel eqBalanceDesLabel =  new JLabel();
-    private final JLabel eqBalanceHeaderLabel =  new JLabel();
-    private final JSeparator eqBalanceSeparator =  new JSeparator();
+    private final JLabel eqBalanceDesLabel = new JLabel();
+    private final JLabel eqBalanceHeaderLabel = new JLabel();
+    private final JSeparator eqBalanceSeparator = new JSeparator();
 
-    private final JLabel concentrationHeaderLabel =  new JLabel();
-    private final JLabel concentrationDesLabel =  new JLabel();
+    private final JLabel concentrationHeaderLabel = new JLabel();
+    private final JLabel concentrationDesLabel = new JLabel();
     private final JSeparator concentrationSeparator = new JSeparator();
 
-    private final JLabel mlrMass_elConfig_pOfComDes =  new JLabel();
-    private final JLabel mlrMass_elConfig_pOfComDesHeader =  new JLabel();
-    private final JSeparator mlrMass_elConfig_pOfComSeparator =  new JSeparator();
+    private final JLabel mlrMass_elConfig_pOfComDes = new JLabel();
+    private final JLabel mlrMass_elConfig_pOfComDesHeader = new JLabel();
+    private final JSeparator mlrMass_elConfig_pOfComSeparator = new JSeparator();
 
-    private final JLabel titrationDesLabel =  new JLabel();
-    private final JLabel titrationHeaderLabel =  new JLabel();
-    private final JSeparator titrationSeparator =  new JSeparator();
-
-
+    private final JLabel titrationDesLabel = new JLabel();
+    private final JLabel titrationHeaderLabel = new JLabel();
+    private final JSeparator titrationSeparator = new JSeparator();
 
     public NeedHelpPanel() {
         initComponent();
@@ -32,7 +29,6 @@ public class NeedHelpPanel extends JPanel {
     }
 
     private void initComponent() {
-
         contentHolderScrollPane.setBorder(null);
         contentHolderScrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         contentHolderScrollPane.setPreferredSize(new Dimension(787, 634));
@@ -74,7 +70,6 @@ public class NeedHelpPanel extends JPanel {
         titrationHeaderLabel.setText("Titration: ");
 
         contentHolderScrollPane.setViewportView(contentHolderPanel);
-
     }
 
     private void setComponentLayout() {

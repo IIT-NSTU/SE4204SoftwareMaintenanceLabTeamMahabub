@@ -28,7 +28,6 @@ public class Compound {
 
         }
         this.molarMass = sum;
-
     }
 
     //percentage of every atom present in the compound. Based on - mass
@@ -37,7 +36,6 @@ public class Compound {
     //mass of O => (15.9994)
     //percentage of H in H2O => (1.00794*2)/molar mass of H2O *100
     //percentage of O in H2O => (15.9994)/molar mass of H2O *100
-
     private void calculatePercentageOfCompletion() {
         int totalElements = compoundManager.getAtomList().entrySet().size();
         percentageOfCompletion = new ArrayList<>(totalElements);
@@ -54,15 +52,13 @@ public class Compound {
             elementDetails.put("totalAtoms", String.valueOf(totalAtoms));
 
             percentageOfCompletion.add(elementDetails);
-
         }
+
         for (HashMap<String, String> element : percentageOfCompletion) {
             double massPercent = (Double.parseDouble(element.get("atomicMass")) / this.getMolarMass()) * 100;
             element.put("massPercent", String.valueOf(massPercent));
         }
-
     }
-
 
     public ArrayList<HashMap<String, String>> getPercentageOfCompletion() {
         if (percentageOfCompletion == null) {
@@ -81,8 +77,8 @@ public class Compound {
         }
         return molarMass;
     }
-    public Atom[] getAtomList(){
+
+    public Atom[] getAtomList() {
         return compoundManager.getAtomList().keySet().toArray(new Atom[0]);
     }
-
 }

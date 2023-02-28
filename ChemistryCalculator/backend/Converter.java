@@ -5,9 +5,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 
 public class Converter {
-    private static final HashMap<String, HashMap<String, Double>> FACTOR_MAP
-            = new HashMap<>();
-
+    private static final HashMap<String, HashMap<String, Double>> FACTOR_MAP = new HashMap<>();
 
     //registering Factor
     static {
@@ -48,12 +46,9 @@ public class Converter {
                         .map(entry -> new Step(entry.getKey(), stepValue * entry.getValue()))
                         .forEach(stack::add);
             }
-
-
         }
         //if factors are not registered
-        throw new IllegalArgumentException("Cannot not convert from " + from
-                + " to " + to);
+        throw new IllegalArgumentException("Cannot not convert from " + from + " to " + to);
     }
 
     public static void registerFactor(String from, String to, double factor) {

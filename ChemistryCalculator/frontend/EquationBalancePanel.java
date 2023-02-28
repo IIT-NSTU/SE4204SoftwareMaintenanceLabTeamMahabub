@@ -226,10 +226,7 @@ public class EquationBalancePanel extends JPanel {
         );
     }
 
-
-
     private void balanceButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
         String reactants = reactantsTextfield.getText();
         String products = productsTextfield.getText();
         if (!reactants.isEmpty() || !products.isEmpty()) {
@@ -245,7 +242,6 @@ public class EquationBalancePanel extends JPanel {
 
                 new History() {
                 }.add(balancedEquation);
-
             } catch (InvalidAtomException | InvalidEquationException | FileNotFoundException e) {
                 errorMessageLabel.setText(e.getMessage());
                 errorMessagePanel.setVisible(true);
@@ -256,16 +252,12 @@ public class EquationBalancePanel extends JPanel {
             errorMessagePanel.setVisible(true);
             ansPanel.setVisible(false);
         }
-
     }
 
-
     private void historyButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
         HistoryFrame history;
         try {
             history = new HistoryFrame();
-
         } catch (IOException e) {
             errorMessageLabel.setText("History panel is empty");
             errorMessagePanel.setVisible(true);
@@ -278,12 +270,9 @@ public class EquationBalancePanel extends JPanel {
     }
 
     private void clearButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
         reactantsTextfield.setText(null);
         productsTextfield.setText(null);
         errorMessagePanel.setVisible(false);
         ansPanel.setVisible(false);
-
     }
-
 }

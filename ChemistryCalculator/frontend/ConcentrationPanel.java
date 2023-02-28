@@ -190,8 +190,6 @@ public class ConcentrationPanel extends JPanel {
                                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-
-
         //Layout for ans Panel.
         GroupLayout ansPanelLayout = new GroupLayout(ansPanel);
         ansPanel.setLayout(ansPanelLayout);
@@ -317,11 +315,9 @@ public class ConcentrationPanel extends JPanel {
     }
 
     private void getConcentrationButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
         String compound_text = compoundTextfield.getText();
         String givenCompoundMass_text = massTextfield.getText();
         String volumeOfSolution_text = volumeTextfield.getText();
-
 
         if (compound_text.isEmpty()) {
             errorMessagePanel.setVisible(true);
@@ -397,7 +393,6 @@ public class ConcentrationPanel extends JPanel {
     }
 
     private void clearButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
         compoundTextfield.setText(null);
         massTextfield.setText(null);
         volumeTextfield.setText(null);
@@ -413,8 +408,6 @@ public class ConcentrationPanel extends JPanel {
     }
 
     private void normalityCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
         equivalentNumTextfield.setEnabled(normalityCheckBox.isSelected());
     }
-
 }
