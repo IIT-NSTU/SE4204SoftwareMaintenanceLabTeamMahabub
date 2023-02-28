@@ -2,7 +2,7 @@ package ChemistryCalculator.backend;
 
 import java.util.HashMap;
 
-public class Database {
+public class AtomDatabase {
     private static final HashMap<String, Atom> allAtoms = new HashMap<>();
 
     static {
@@ -146,14 +146,14 @@ public class Database {
     }
 
     public static Atom getAtom(String symbol) {
-        if (Database.isValidAtom(symbol)) {
+        if (AtomDatabase.isValidAtom(symbol)) {
             return allAtoms.get(symbol);
         }
         throw new InvalidAtomException("'" + symbol + "'" + " is not a valid symbol !");
     }
 
     public static Atom getAtom(int atomicNumber) {
-        if (Database.isValidAtom(atomicNumber)) {
+        if (AtomDatabase.isValidAtom(atomicNumber)) {
             for (Atom atom : allAtoms.values()) {
                 if (atom.getAtomicNumber() == atomicNumber) {
                     return atom;

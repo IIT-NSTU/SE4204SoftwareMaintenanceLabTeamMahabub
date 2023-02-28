@@ -1,7 +1,7 @@
 package ChemistryCalculator.frontend;
 
 import ChemistryCalculator.backend.Atom;
-import ChemistryCalculator.backend.Database;
+import ChemistryCalculator.backend.AtomDatabase;
 import ChemistryCalculator.backend.InvalidAtomException;
 
 import javax.swing.*;
@@ -213,7 +213,7 @@ public class ElectronConfigPanel extends JPanel {
             try {
                 int atomicNumber = Integer.parseInt(atom_text);
                 try {
-                    atom = Database.getAtom(atomicNumber);
+                    atom = AtomDatabase.getAtom(atomicNumber);
 
                     atomicNameAnsLabel.setText(atom.getName());
                     massOfAtomAnsLabel.setText(String.valueOf(atom.getAtomicMass()));
@@ -235,7 +235,7 @@ public class ElectronConfigPanel extends JPanel {
 
             } catch (NumberFormatException e) {
                 try {
-                    atom = Database.getAtom(atom_text);
+                    atom = AtomDatabase.getAtom(atom_text);
                     atomicNameAnsLabel.setText(atom.getName());
                     massOfAtomAnsLabel.setText(String.valueOf(atom.getAtomicMass()));
                     labelForAtomicNumAns.setText("Atomic Number :");
