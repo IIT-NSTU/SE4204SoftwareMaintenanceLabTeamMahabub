@@ -1,27 +1,49 @@
 package ChemistryCalculator.backend;
 
+import javax.swing.filechooser.FileSystemView;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.util.HashMap;
 
-
 public class Database {
-    private HashMap<String, String[]> allAtoms;
+    public static final String DATABASE_FILE_PATH = FileSystemView.getFileSystemView().getDefaultDirectory().getPath() +
+            File.separator + "Chemistry Calculator" + File.separator + "database.ser";
+    private static HashMap<String, Atom> allAtoms;
+    private static Database database = null;
 
-    public Database() {
+    private Database() {
+        // Get database from resource
+        allAtoms = DatabaseSerializer.deserialize(getClass().getResourceAsStream("/ChemistryCalculator/database/database.ser"));
 
-        try {
-            InputStream fileInputStream = getClass().getResourceAsStream("/ChemistryCalculator/database/database.ser");
-            ObjectInputStream objectinputStream = new ObjectInputStream(fileInputStream);
-            this.allAtoms = (HashMap<String, String[]>) objectinputStream.readObject();
+        // If resource is empty get from local file path
+        if (allAtoms.isEmpty()) {
+            allAtoms = DatabaseSerializer.deserialize(DATABASE_FILE_PATH);
+        }
 
-        } catch (IOException | ClassNotFoundException e) {
-            System.out.printf("Database Error ! %s%n", e.getMessage());
+        // If local file path not contains database. Create the database
+        if (allAtoms.isEmpty()) {
+            allAtoms = new DatabaseSerializer().serialize(DATABASE_FILE_PATH);
         }
     }
 
-    public HashMap<String, String[]> getAllAtoms() {
+    public HashMap<String, Atom> getAllAtoms() {
         return allAtoms;
+    }
+
+    public static boolean isValidAtom(String symbol) {
+        return allAtoms.containsKey(symbol);
+    }
+
+    public static boolean isValidAtom(int atomicNumber) {
+        return atomicNumber >= 1 && atomicNumber <= 118;
+    }
+
+    public static Database getInstance() {
+        if (database == null) {
+            database = new Database();
+        }
+        return database;
     }
 }

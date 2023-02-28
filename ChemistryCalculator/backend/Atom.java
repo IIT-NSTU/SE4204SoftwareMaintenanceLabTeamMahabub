@@ -1,30 +1,44 @@
 package ChemistryCalculator.backend;
 
+import java.io.Serializable;
 import java.util.HashMap;
+import java.util.Map;
 
-public class Atom {
-    private static final HashMap<String, String[]> allAtoms = new Database().getAllAtoms();
+public class Atom implements Serializable {
+    private static final HashMap<String, Atom> allAtoms = Database.getInstance().getAllAtoms();
     private String symbol;
     private String name;
-    private  double atomicMass;
+    private double atomicMass;
     private int atomicNumber;
 
-    private Atom(String symbol) {
-        String[] atom = allAtoms.get(symbol);
-        this.symbol = symbol;
-        atomicNumber = Integer.parseInt(atom[0]);
-        name = atom[1];
-        atomicMass = Double.parseDouble(atom[2]);
-
+    public Atom(String symbol) {
+        this(allAtoms.get(symbol));
     }
 
-    private Atom(int atomicNumber) {
-        allAtoms.entrySet().stream().filter(entry -> atomicNumber == Integer.parseInt(entry.getValue()[0])).forEachOrdered(entry -> {
-            this.symbol = entry.getKey();
-            this.name = entry.getValue()[1];
-            this.atomicMass = Double.parseDouble(entry.getValue()[2]);
-        });
+    public Atom(int atomicNumber, String symbol, String name, double atomicMass) {
         this.atomicNumber = atomicNumber;
+        this.symbol = symbol;
+        this.name = name;
+        this.atomicMass = atomicMass;
+    }
+
+    public Atom(Atom atom) {
+        this.atomicNumber = atom.atomicNumber;
+        this.symbol = atom.symbol;
+        this.name = atom.name;
+        this.atomicMass = atom.atomicMass;
+    }
+
+    public Atom(int atomicNumber) {
+        for (Atom atom : allAtoms.values()) {
+            if (atom.atomicNumber == atomicNumber) {
+                this.atomicNumber = atomicNumber;
+                this.symbol = atom.symbol;
+                this.name = atom.name;
+                this.atomicMass = atom.atomicMass;
+                break;
+            }
+        }
     }
 
     public static Atom getInstance(String symbol) {
@@ -35,7 +49,7 @@ public class Atom {
     }
 
     public static Atom getInstance(int atomicNumber) {
-        if (atomicNumber >= 1 && atomicNumber <= 118){
+        if (atomicNumber >= 1 && atomicNumber <= 118) {
             return new Atom(atomicNumber);
         }
         throw new InvalidAtomException("'" + atomicNumber + "'" + " is not a valid atomic number !");
@@ -45,9 +59,7 @@ public class Atom {
         return allAtoms.containsKey(symbol);
     }
 
-
     public String getElectronConfig() {
-
         int counter;
         int tempAtomicNumber = this.atomicNumber;
 
@@ -98,9 +110,7 @@ public class Atom {
 
     @Override
     public String toString() {
-        return "Atom{" +
-                "name='" + name + '\'' +
-                '}';
+        return String.format("Atom {%s %s %f %d}", name, symbol, atomicMass, atomicNumber);
     }
 }
 
