@@ -13,15 +13,15 @@ public class CompoundManager {
     }
 
     public CompoundManager(String compound) {
-        this.compoundDecipher(compound, 0, 1);
+        this(compound, 0, 1);
     }
 
     public CompoundManager(Compound compound, int index, int side) {
-        this.compoundDecipher(compound.getCompound(), index, side);
+        this(compound.getCompound(), index, side);
     }
 
     public CompoundManager(Compound compound) {
-        this.compoundDecipher(compound.getCompound(), 0, 1);
+        this(compound, 0, 1);
     }
 
     public void append(String compound) {
@@ -40,29 +40,29 @@ public class CompoundManager {
         this.compoundDecipher(compound.getCompound(), index, side);
     }
 
-
     //this function  breakdown the complex compounds into simple compound(segment).
     //Example = > Cu(SO4)2*5H2O  = Cu, SO4, H2O
     private void compoundDecipher(String compound, int index, int side) {
         //separating out the parenthesis, *,  from the rest of the compound
-        String[] segments = compound.split("(?<=\\)([0-9]{0,100}))(?=[A-Z])|(?=\\([A-Za-z0-9]*\\)[0-9]*)|(?=\\*)");
+        String[] segments = compound.split("(?<=\\)(\\d{0,100}))(?=[A-Z])|(?=\\([A-Za-z\\d]*\\)\\d*)|(?=\\*)");
 
         for (String segment : segments) {
             int multiplier;
             String eachCompound;
             if (segment.startsWith("(")) {
-                String[] splitedSegment = segment.split("\\)(?=\\d*)");
-                //compoend is in splitedSegment[0] . splitedSegment[1] has the value of  multiplier.
-                multiplier = Integer.parseInt(splitedSegment[1]);
-                //from splitedSegment[0], taking substring(1) because it startsWith "("
-                eachCompound = splitedSegment[0].substring(1);
+                String[] compoundWithMultiplier = segment.split("\\)(?=\\d*)");
+
+                //Compound is in splitSegment[0] . splitSegment[1] has the value of  multiplier.
+                multiplier = Integer.parseInt(compoundWithMultiplier[1]);
+                //from splitSegment[0], taking substring(1) because it startsWith "("
+                eachCompound = compoundWithMultiplier[0].substring(1);
             } else {
                 if (segment.startsWith("*")) {
-                    String[] splitedSegment = segment.split("\\*");
-                    //splitedSegment[0] is always empty. splitedSegment[1] has the value of compound with multiplier.
+                    String[] splitSegment = segment.split("\\*");
+                    //splitSegment[0] is always empty. splitSegment[1] has the value of compound with multiplier.
                     //Now separating multiplier and compound
                     //multiplier is in index 0, compound in 1
-                    String[] compoundWithMultiplier = splitedSegment[1].split("(?<=^[0-9]{0,100})(?=[A-Z])");
+                    String[] compoundWithMultiplier = splitSegment[1].split("(?<=^\\d{0,100})(?=[A-Z])");
                     multiplier = Integer.parseInt(compoundWithMultiplier[0]);
                     eachCompound = compoundWithMultiplier[1];
 
@@ -78,12 +78,11 @@ public class CompoundManager {
     }
 
     private void findAtoms(String eachCompound, int index, int multiplier, int side) {
-        String[] atomsAndNumbers = eachCompound.split("(?=[A-Z])|(?<=[A-Za-z])(?=[0-9])");
+        String[] atomsAndNumbers = eachCompound.split("(?=[A-Z])|(?<=[A-Za-z])(?=\\d)");
         int i = 0;
 
         while (i < atomsAndNumbers.length) {
-
-            if ((i + 1) < atomsAndNumbers.length && atomsAndNumbers[i + 1].matches("^[0-9]+$")) {
+            if ((i + 1) < atomsAndNumbers.length && atomsAndNumbers[i + 1].matches("^\\d+$")) {
                 int count = Integer.parseInt(atomsAndNumbers[i + 1]) * multiplier;
                 addToMatrix(atomsAndNumbers[i], index, count, side);
                 i++;
@@ -108,7 +107,6 @@ public class CompoundManager {
     //         H2O        =  0, -1, -2,  0
     //NullSpace of this matrix gives the corresponding balanced Coefficient
     private void addToMatrix(String atoms, int index, int multiplier, int side) {
-
         if (index == elementMatrix.size()) {
             elementMatrix.add(new ArrayList<>());
             for (int i = 0; i < elementList.size(); i++) {
@@ -117,22 +115,17 @@ public class CompoundManager {
         }
 
         if (!elementList.containsKey(atoms)) {
-            int value = 0;
-            if (elementList.size() > 0) {
-                value = elementList.size();
-            }
+            int value = elementList.size();
             elementList.put(atoms, value);
             atomList.put(AtomDatabase.getAtom(atoms), value);
             for (ArrayList<Integer> matrix : elementMatrix) {
                 matrix.add(0);
             }
-
         }
 
         int column = elementList.get(atoms);
         int value = elementMatrix.get(index).get(column) + multiplier * side;
         elementMatrix.get(index).set(column, value);
-
     }
 
     public HashMap<Atom, Integer> getAtomList() {
@@ -142,6 +135,5 @@ public class CompoundManager {
     public ArrayList<ArrayList<Integer>> getElementMatrix() {
         return elementMatrix;
     }
-
 
 }
