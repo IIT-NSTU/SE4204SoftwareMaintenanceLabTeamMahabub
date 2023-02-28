@@ -5,8 +5,6 @@ import java.io.File;
 import java.util.HashMap;
 
 public class Database {
-//    public static final String DATABASE_FILE_PATH = FileSystemView.getFileSystemView().getDefaultDirectory().getPath() +
-//            File.separator + "Chemistry Calculator" + File.separator + "database.ser";
     private static final HashMap<String, Atom> allAtoms = new HashMap<>();
     private static Database database = null;
 
