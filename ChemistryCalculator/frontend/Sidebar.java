@@ -7,23 +7,21 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 public class Sidebar extends JPanel {
-    private final JLabel developer_sign_label = new JLabel();
+    private final JLabel developerSignLabel = new JLabel();
     private final JLabel logoPanel = new JLabel();
     private final JSeparator logoSeparator = new JSeparator();
     private final JScrollPane menuHolderScrollPane = new JScrollPane();
     private final JPanel menuHolder = new JPanel();
 
-    ArrayList<MenuItem> menuItems = new ArrayList<>();
-    ArrayList<ContentPanel> containerPanels = new ArrayList<>();
+    private final ArrayList<MenuItem> menuItems = new ArrayList<>();
 
-    Color active_menu_color = new Color(255, 255, 153);
-    Font active_menu_font = new Font("Segoe UI", Font.BOLD, 15);
-    Color normal_menu_color = new Color(221, 221, 221);
-    Font normal_menu_font = new Font("Segoe UI", Font.BOLD, 14);
-    Cursor pointer = new Cursor(Cursor.HAND_CURSOR);
+    private static final Color ACTIVE_MENU_ITEM_COLOR = new Color(255, 255, 153);
+    private static final Font ACTIVE_MENU_ITEM_FONT = new Font("Segoe UI", Font.BOLD, 15);
+    private static final Color SIDEBAR_FOREGROUND_COLOR = new Color(221, 221, 221);
+    private static final Font SIDEBAR_FONT = new Font("Segoe UI", Font.BOLD, 14);
+    private static final Cursor HAND_CURSOR = new Cursor(Cursor.HAND_CURSOR);
 
     public void addMenuFromContentPanels(ArrayList<ContentPanel> containerPanels) {
-        this.containerPanels = containerPanels;
         for (ContentPanel panel : containerPanels) {
             this.menuItems.add(new MenuItem(panel));
         }
@@ -45,14 +43,14 @@ public class Sidebar extends JPanel {
         menuHolderScrollPane.setViewportView(menuHolder);
 
         logoPanel.setFont(new Font("Segoe UI", Font.BOLD, 24));
-        logoPanel.setForeground(new Color(221, 221, 221));
+        logoPanel.setForeground(SIDEBAR_FOREGROUND_COLOR);
         logoPanel.setHorizontalAlignment(SwingConstants.CENTER);
         logoPanel.setText("ChemCal");
 
-        developer_sign_label.setFont(new Font("Segoe UI", Font.BOLD, 12));
-        developer_sign_label.setForeground(new Color(221, 221, 221));
-        developer_sign_label.setHorizontalAlignment(SwingConstants.CENTER);
-        developer_sign_label.setText("Developed by - HumbleFooL");
+        developerSignLabel.setFont(new Font("Segoe UI", Font.BOLD, 12));
+        developerSignLabel.setForeground(SIDEBAR_FOREGROUND_COLOR);
+        developerSignLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        developerSignLabel.setText("Developed by - HumbleFooL");
     }
 
     private LayoutManager getMenuItemHolderLayout(Container container) {
@@ -78,7 +76,7 @@ public class Sidebar extends JPanel {
 
         sidebarLayout.setHorizontalGroup(
                 sidebarLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                        .addComponent(developer_sign_label, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(developerSignLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(menuHolderScrollPane)
                         .addGroup(sidebarLayout.createSequentialGroup()
                                 .addGap(20, 20, 20)
@@ -97,7 +95,7 @@ public class Sidebar extends JPanel {
                                 .addGap(50, 50, 50)
                                 .addComponent(menuHolderScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 385, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(developer_sign_label, GroupLayout.PREFERRED_SIZE, 26, GroupLayout.PREFERRED_SIZE))
+                                .addComponent(developerSignLabel, GroupLayout.PREFERRED_SIZE, 26, GroupLayout.PREFERRED_SIZE))
         );
         return sidebarLayout;
     }
@@ -112,13 +110,14 @@ public class Sidebar extends JPanel {
 
         private final JLabel label = new JLabel();
         private final JLabel icon = new JLabel();
-        private JPanel targetPanel;
+        private final JPanel targetPanel;
 
         public MenuItem(ContentPanel targetPanel) {
             this(targetPanel.getTitle(), targetPanel.getIconName(), targetPanel);
         }
 
         public MenuItem(String name, String iconName, JPanel targetPanel) {
+            this.targetPanel = targetPanel;
             setBackground(MENU_ITEM_BACKGROUND_COLOR);
             addMouseListener(new MouseAdapter() {
                 public void mouseClicked(MouseEvent evt) {
@@ -137,8 +136,8 @@ public class Sidebar extends JPanel {
             icon.setHorizontalAlignment(SwingConstants.CENTER);
             icon.setIcon(new ImageIcon(getClass().getResource("/ChemistryCalculator/icons/" + iconName)));
 
-            label.setFont(normal_menu_font);
-            label.setForeground(new Color(221, 221, 221));
+            label.setFont(SIDEBAR_FONT);
+            label.setForeground(SIDEBAR_FOREGROUND_COLOR);
             label.setText(name);
 
             setLayout(getMenuItemLayout(this));
@@ -163,27 +162,27 @@ public class Sidebar extends JPanel {
             return menuPanelLayout;
         }
 
-        private void menuMouseClicked(MouseEvent evt) {
+        private void menuMouseClicked(MouseEvent event) {
             //when a certain menu is clicked , corresponding bodyPanel will be visible.
             for (MenuItem panel : menuItems) {
-                if (panel.equals(evt.getSource())) {
+                if (panel.equals(event.getSource())) {
                     panel.targetPanel.setVisible(true);
-                    panel.setForeground(active_menu_color);
-                    panel.setFont(active_menu_font);
+                    panel.setForeground(ACTIVE_MENU_ITEM_COLOR);
+                    panel.setFont(ACTIVE_MENU_ITEM_FONT);
                 } else {
                     panel.targetPanel.setVisible(false);
-                    panel.setForeground(normal_menu_color);
-                    panel.setFont(normal_menu_font);
+                    panel.setForeground(SIDEBAR_FOREGROUND_COLOR);
+                    panel.setFont(SIDEBAR_FONT);
                 }
             }
         }
 
-        private void menuMouseEntered(MouseEvent evt) {
+        private void menuMouseEntered(MouseEvent event) {
             this.setBackground(new Color(85, 65, 118));
-            this.setCursor(pointer);
+            this.setCursor(HAND_CURSOR);
         }
 
-        private void menuMouseExited(MouseEvent evt) {
+        private void menuMouseExited(MouseEvent event) {
             this.setBackground(new Color(64, 43, 100));
         }
     }
