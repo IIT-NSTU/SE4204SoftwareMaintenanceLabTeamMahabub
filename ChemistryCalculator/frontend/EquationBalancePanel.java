@@ -36,6 +36,7 @@ public class EquationBalancePanel extends ContentPanel {
     private final JLabel givenEquationLabel = new JLabel();
     private final JScrollPane givenEquationScrollPane = new JScrollPane();
 
+    private final History historyManager = new History();
 
     public EquationBalancePanel() {
         super("Equation Balance", "icons8_scales_25px_1.png");
@@ -241,8 +242,7 @@ public class EquationBalancePanel extends ContentPanel {
                 balancedEquationLabel.setText(Formater.formatEquation(balancedEquation));
                 ansPanel.setVisible(true);
 
-                new History() {
-                }.add(balancedEquation);
+                historyManager.addHistory(balancedEquation);
             } catch (InvalidAtomException | InvalidEquationException | FileNotFoundException e) {
                 errorMessageLabel.setText(e.getMessage());
                 errorMessagePanel.setVisible(true);

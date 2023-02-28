@@ -8,32 +8,44 @@ import java.io.PrintWriter;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public interface History {
-    default void add(String line) throws FileNotFoundException {
-        String PATH = FileSystemView.getFileSystemView().getDefaultDirectory().getPath() + File.separator;
-        String directoryName = PATH.concat("Chemistry Calculator");
+public class History {
+
+    private File historyFile = null;
+
+    public History() {
+        checkForHistoryFile();
+    }
+
+    private void checkForHistoryFile() {
+        String historyFilePath = FileSystemView.getFileSystemView().getDefaultDirectory().getPath() + File.separator;
+        String directoryName = historyFilePath.concat("Chemistry Calculator");
         String txtFile = "history.txt";
 
         File directory = new File(directoryName);
-        if (!directory.exists()){
-            directory.mkdir();
+        if (!directory.exists()) {
+            if (!directory.mkdir()) {
+                System.err.println("Can not create directory '" + directoryName + "' at '" + historyFilePath);
+                return;
+            }
         }
 
-        File history = new File(directoryName,txtFile);
+        this.historyFile = new File(directoryName, txtFile);
+    }
+
+    public void addHistory(String line) throws FileNotFoundException {
+        if (historyFile == null) {
+            System.err.println("History file can not be created");
+            return;
+        }
 
         PrintWriter writer;
-        if (history.exists() && !history.isDirectory()) {
-            writer = new PrintWriter(new FileOutputStream(new File(directoryName, txtFile), true));
+        if (historyFile.exists() && !historyFile.isDirectory()) {
+            writer = new PrintWriter(new FileOutputStream(historyFile, true));
         } else {
-            writer = new PrintWriter(history);
+            writer = new PrintWriter(historyFile);
         }
 
-        //adding date & time
-        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss, dd/MM/yyyy");
-        LocalDateTime now = LocalDateTime.now();
-
-        line = line.concat("    [" + dateTimeFormatter.format(now) +"]");
-        writer.println(line);
+        writer.println(line.concat("    [" + DateTimeFormatter.ofPattern("HH:mm:ss, dd/MM/yyyy").format(LocalDateTime.now()) + "]"));
         writer.flush();
         writer.close();
     }
