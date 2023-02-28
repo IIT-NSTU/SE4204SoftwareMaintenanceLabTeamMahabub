@@ -180,10 +180,10 @@ public class DatabaseSerializer {
     }
 
     public static void main(String[] args) throws IOException {
-        DatabaseSerializer databaseSerializer = new DatabaseSerializer();
-        databaseSerializer.serialize(Database.DATABASE_FILE_PATH);
-        HashMap<String, Atom> atomMap = DatabaseSerializer.deserialize(new FileInputStream(Database.DATABASE_FILE_PATH));
-        atomMap.forEach((k, v) -> System.out.println(k + " " + v));
+//        DatabaseSerializer databaseSerializer = new DatabaseSerializer();
+//        databaseSerializer.serialize(Database.DATABASE_FILE_PATH);
+//        HashMap<String, Atom> atomMap = DatabaseSerializer.deserialize(new FileInputStream(Database.DATABASE_FILE_PATH));
+//        atomMap.forEach((k, v) -> System.out.println(k + " " + v));
 
 //########## printing all element from database.ser##############
 //        FileInputStream fileInputStream = new FileInputStream("atom.ser");

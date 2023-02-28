@@ -122,7 +122,7 @@ public class CompoundManager {
                 value = elementList.size();
             }
             elementList.put(atoms, value);
-            atomList.put(Atom.getInstance(atoms), value);
+            atomList.put(Database.getAtom(atoms), value);
             for (ArrayList<Integer> matrix : elementMatrix) {
                 matrix.add(0);
             }

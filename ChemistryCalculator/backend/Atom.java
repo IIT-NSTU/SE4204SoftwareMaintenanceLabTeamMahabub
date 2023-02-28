@@ -1,19 +1,22 @@
 package ChemistryCalculator.backend;
 
-import java.io.Serializable;
-import java.util.HashMap;
-import java.util.Map;
+public class Atom {
+//    private final HashMap<String, Atom> allAtoms = Database.getInstance().getAllAtoms();
+    private final String symbol;
+    private final String name;
+    private final double atomicMass;
+    private final int atomicNumber;
 
-public class Atom implements Serializable {
-    private static final HashMap<String, Atom> allAtoms = Database.getInstance().getAllAtoms();
-    private String symbol;
-    private String name;
-    private double atomicMass;
-    private int atomicNumber;
+//    private Atom(String symbol) {
+//        initializeValue(allAtoms.get(symbol));
+//    }
 
-    public Atom(String symbol) {
-        this(allAtoms.get(symbol));
-    }
+//    private void initializeValue(Atom atom) {
+//        this.atomicNumber = atom.atomicNumber;
+//        this.symbol = atom.symbol;
+//        this.name = atom.name;
+//        this.atomicMass = atom.atomicMass;
+//    }
 
     public Atom(int atomicNumber, String symbol, String name, double atomicMass) {
         this.atomicNumber = atomicNumber;
@@ -22,42 +25,39 @@ public class Atom implements Serializable {
         this.atomicMass = atomicMass;
     }
 
-    public Atom(Atom atom) {
-        this.atomicNumber = atom.atomicNumber;
-        this.symbol = atom.symbol;
-        this.name = atom.name;
-        this.atomicMass = atom.atomicMass;
-    }
+//    public Atom(Atom atom) {
+//        this.atomicNumber = atom.atomicNumber;
+//        this.symbol = atom.symbol;
+//        this.name = atom.name;
+//        this.atomicMass = atom.atomicMass;
+//    }
 
-    public Atom(int atomicNumber) {
-        for (Atom atom : allAtoms.values()) {
-            if (atom.atomicNumber == atomicNumber) {
-                this.atomicNumber = atomicNumber;
-                this.symbol = atom.symbol;
-                this.name = atom.name;
-                this.atomicMass = atom.atomicMass;
-                break;
-            }
-        }
-    }
+//    public Atom(int atomicNumber) {
+//        for (Atom atom : allAtoms.values()) {
+//            if (atom.atomicNumber == atomicNumber) {
+//                initializeValue(atom);
+//                break;
+//            }
+//        }
+//    }
 
-    public static Atom getInstance(String symbol) {
-        if (isValid(symbol)) {
-            return new Atom(symbol);
-        }
-        throw new InvalidAtomException("'" + symbol + "'" + " is not a valid symbol !");
-    }
+//    public static Atom getInstance(String symbol) {
+//        if (Database.isValidAtom(symbol)) {
+//            return new Atom(symbol);
+//        }
+//        throw new InvalidAtomException("'" + symbol + "'" + " is not a valid symbol !");
+//    }
 
-    public static Atom getInstance(int atomicNumber) {
-        if (atomicNumber >= 1 && atomicNumber <= 118) {
-            return new Atom(atomicNumber);
-        }
-        throw new InvalidAtomException("'" + atomicNumber + "'" + " is not a valid atomic number !");
-    }
+//    public static Atom getInstance(int atomicNumber) {
+//        if (atomicNumber >= 1 && atomicNumber <= 118) {
+//            return new Atom(atomicNumber);
+//        }
+//        throw new InvalidAtomException("'" + atomicNumber + "'" + " is not a valid atomic number !");
+//    }
 
-    private static boolean isValid(String symbol) {
-        return allAtoms.containsKey(symbol);
-    }
+//    private static boolean isValid(String symbol) {
+//        return allAtoms.containsKey(symbol);
+//    }
 
     public String getElectronConfig() {
         int counter;
