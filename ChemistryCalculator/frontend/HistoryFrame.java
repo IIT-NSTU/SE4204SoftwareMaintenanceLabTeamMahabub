@@ -75,7 +75,7 @@ public class HistoryFrame extends JFrame {
         clearButton.setBackground(MAIN_COLOR);
         clearButton.setFont(SEGOE_UI);
         clearButton.setForeground(GRAY);
-        clearButton.setText("Clear History");
+        clearButton.setText("Clear HistoryManager");
         clearButton.setAutoscrolls(true);
         clearButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
         clearButton.addActionListener(actionEvent -> {
@@ -97,7 +97,7 @@ public class HistoryFrame extends JFrame {
         setBounds(100, 100, 900, 500);
         setIconImage(ResourceManager.getInstance().getIconResource("icons8_biohazard_120px.png").getImage());
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Equation Balance - History");
+        setTitle("Equation Balance - HistoryManager");
     }
 
     private void clearButtonActionPerformed(ActionEvent actionEvent) throws IOException {

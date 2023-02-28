@@ -1,7 +1,7 @@
 package ChemistryCalculator.frontend;
 
 import ChemistryCalculator.backend.EquationBalancer;
-import ChemistryCalculator.backend.History;
+import ChemistryCalculator.backend.HistoryManager;
 import ChemistryCalculator.backend.InvalidAtomException;
 import ChemistryCalculator.backend.InvalidEquationException;
 
@@ -36,7 +36,7 @@ public class EquationBalancePanel extends ContentPanel {
     private final JLabel givenEquationLabel = new JLabel();
     private final JScrollPane givenEquationScrollPane = new JScrollPane();
 
-    private final History historyManager = new History();
+    private final HistoryManager historyManager = new HistoryManager();
 
     public EquationBalancePanel() {
         super("Equation Balance", "icons8_scales_25px_1.png");
@@ -73,7 +73,7 @@ public class EquationBalancePanel extends ContentPanel {
         historyButton.setBackground(MAIN_COLOR);
         historyButton.setFont(SEGOE_UI);
         historyButton.setForeground(GRAY);
-        historyButton.setText("History");
+        historyButton.setText("HistoryManager");
         historyButton.setAutoscrolls(true);
         historyButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
         historyButton.addActionListener(this::historyButtonActionPerformed);
@@ -260,7 +260,7 @@ public class EquationBalancePanel extends ContentPanel {
         try {
             history = new HistoryFrame();
         } catch (IOException e) {
-            errorMessageLabel.setText("History panel is empty");
+            errorMessageLabel.setText("HistoryManager panel is empty");
             errorMessagePanel.setVisible(true);
             ansPanel.setVisible(false);
             return;

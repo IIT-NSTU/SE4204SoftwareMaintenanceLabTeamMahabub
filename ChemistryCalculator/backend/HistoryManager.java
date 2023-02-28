@@ -8,11 +8,11 @@ import java.io.PrintWriter;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class History {
+public class HistoryManager {
 
     private File historyFile = null;
 
-    public History() {
+    public HistoryManager() {
         checkForHistoryFile();
     }
 
@@ -34,7 +34,7 @@ public class History {
 
     public void addHistory(String line) throws FileNotFoundException {
         if (historyFile == null) {
-            System.err.println("History file can not be created");
+            System.err.println("HistoryManager file can not be created");
             return;
         }
 
