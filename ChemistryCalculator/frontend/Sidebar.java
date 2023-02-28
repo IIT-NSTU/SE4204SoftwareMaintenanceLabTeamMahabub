@@ -134,7 +134,7 @@ public class Sidebar extends JPanel {
             });
 
             icon.setHorizontalAlignment(SwingConstants.CENTER);
-            icon.setIcon(new ImageIcon(getClass().getResource("/ChemistryCalculator/icons/" + iconName)));
+            icon.setIcon(ResourceManager.getInstance().getIconResource(iconName));
 
             label.setFont(SIDEBAR_FONT);
             label.setForeground(SIDEBAR_FOREGROUND_COLOR);

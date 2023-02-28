@@ -95,7 +95,7 @@ public class HistoryFrame extends JFrame {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setResizable(false);
         setBounds(100, 100, 900, 500);
-        setIconImage(new ImageIcon(getClass().getResource("/ChemistryCalculator/icons/icons8_biohazard_120px.png")).getImage());
+        setIconImage(ResourceManager.getInstance().getIconResource("icons8_biohazard_120px.png").getImage());
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Equation Balance - History");
     }

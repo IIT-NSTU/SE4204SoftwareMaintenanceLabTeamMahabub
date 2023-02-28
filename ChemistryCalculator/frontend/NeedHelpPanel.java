@@ -36,7 +36,7 @@ public class NeedHelpPanel extends ContentPanel {
 
         eqBalanceHeaderLabel.setFont(new Font("Segoe UI", Font.BOLD, 18)); // NOI18N
         eqBalanceHeaderLabel.setForeground(new Color(64, 43, 100));
-        eqBalanceHeaderLabel.setIcon(new ImageIcon(getClass().getResource("/ChemistryCalculator/icons/icons8_document_header_30px_1.png"))); // NOI18N
+        eqBalanceHeaderLabel.setIcon(ResourceManager.getInstance().getIconResource("icons8_document_header_30px_1.png")); // NOI18N
         eqBalanceHeaderLabel.setText("Equation Balancer : ");
 
         eqBalanceDesLabel.setFont(new Font("Segoe UI", Font.BOLD, 14)); // NOI18N
@@ -45,7 +45,7 @@ public class NeedHelpPanel extends ContentPanel {
 
         concentrationHeaderLabel.setFont(new Font("Segoe UI", Font.BOLD, 18)); // NOI18N
         concentrationHeaderLabel.setForeground(new Color(64, 43, 100));
-        concentrationHeaderLabel.setIcon(new ImageIcon(getClass().getResource("/ChemistryCalculator/icons/icons8_document_header_30px_1.png"))); // NOI18N
+        concentrationHeaderLabel.setIcon(ResourceManager.getInstance().getIconResource("icons8_document_header_30px_1.png")); // NOI18N
         concentrationHeaderLabel.setText("Concentration : ");
 
         mlrMass_elConfig_pOfComDes.setFont(new Font("Segoe UI", Font.BOLD, 14)); // NOI18N
@@ -54,7 +54,7 @@ public class NeedHelpPanel extends ContentPanel {
 
         mlrMass_elConfig_pOfComDesHeader.setFont(new Font("Segoe UI", Font.BOLD, 18)); // NOI18N
         mlrMass_elConfig_pOfComDesHeader.setForeground(new Color(64, 43, 100));
-        mlrMass_elConfig_pOfComDesHeader.setIcon(new ImageIcon(getClass().getResource("/ChemistryCalculator/icons/icons8_document_header_30px_1.png"))); // NOI18N
+        mlrMass_elConfig_pOfComDesHeader.setIcon(ResourceManager.getInstance().getIconResource("icons8_document_header_30px_1.png")); // NOI18N
         mlrMass_elConfig_pOfComDesHeader.setText("Molar mass, Electron config & Percent of completion: ");
 
         concentrationDesLabel.setFont(new Font("Segoe UI", Font.BOLD, 14)); // NOI18N
@@ -67,7 +67,7 @@ public class NeedHelpPanel extends ContentPanel {
 
         titrationHeaderLabel.setFont(new Font("Segoe UI", Font.BOLD, 18)); // NOI18N
         titrationHeaderLabel.setForeground(new Color(64, 43, 100));
-        titrationHeaderLabel.setIcon(new ImageIcon(getClass().getResource("/ChemistryCalculator/icons/icons8_document_header_30px_1.png"))); // NOI18N
+        titrationHeaderLabel.setIcon(ResourceManager.getInstance().getIconResource("icons8_document_header_30px_1.png")); // NOI18N
         titrationHeaderLabel.setText("Titration: ");
 
         contentHolderScrollPane.setViewportView(contentHolderPanel);

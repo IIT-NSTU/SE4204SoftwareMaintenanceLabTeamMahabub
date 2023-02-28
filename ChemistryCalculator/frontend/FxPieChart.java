@@ -33,7 +33,7 @@ public class FxPieChart extends JFrame {
         add(chartTablePanel, BorderLayout.CENTER);
 
         setVisible(true);
-        setIconImage(new ImageIcon(getClass().getResource("/ChemistryCalculator/icons/icons8_biohazard_120px.png")).getImage());
+        setIconImage(ResourceManager.getInstance().getIconResource("icons8_biohazard_120px.png").getImage());
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setTitle("Percent of Completion Pie chart");
         setResizable(false);
@@ -61,7 +61,6 @@ public class FxPieChart extends JFrame {
     }
 
     private PieChart createPieChart() {
-
         ObservableList<PieChart.Data> pieData = FXCollections.observableArrayList();
         //percentageOfCompletion vector comes from percentage Of Completion table data model.
         //model : {"Name", "Symbol", "Total atoms", "Atomic mass", "Percentage"};
