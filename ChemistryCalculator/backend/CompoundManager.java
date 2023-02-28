@@ -16,28 +16,8 @@ public class CompoundManager {
         this(compound, 0, 1);
     }
 
-    public CompoundManager(Compound compound, int index, int side) {
-        this(compound.getCompound(), index, side);
-    }
-
-    public CompoundManager(Compound compound) {
-        this(compound, 0, 1);
-    }
-
-    public void append(String compound) {
-        this.compoundDecipher(compound, 0, 1);
-    }
-
     public void append(String compound, int index, int side) {
         this.compoundDecipher(compound, index, side);
-    }
-
-    public void append(Compound compound) {
-        this.compoundDecipher(compound.getCompound(), 0, 1);
-    }
-
-    public void append(Compound compound, int index, int side) {
-        this.compoundDecipher(compound.getCompound(), index, side);
     }
 
     //this function  breakdown the complex compounds into simple compound(segment).
@@ -72,8 +52,6 @@ public class CompoundManager {
                 }
             }
             findAtoms(eachCompound, index, multiplier, side);
-            //System.out.println("before finding element");
-            //System.out.println(eachCompound + "  " + index + "  " + multiplier + "  " + side);
         }
     }
 
