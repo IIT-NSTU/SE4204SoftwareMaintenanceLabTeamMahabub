@@ -1,12 +1,9 @@
 package ChemistryCalculator.backend;
 
-import javax.swing.filechooser.FileSystemView;
-import java.io.File;
 import java.util.HashMap;
 
 public class Database {
     private static final HashMap<String, Atom> allAtoms = new HashMap<>();
-    private static Database database = null;
 
     static {
         allAtoms.put("H", new Atom(1, "H", "Hydrogen",1.00794));
@@ -140,10 +137,6 @@ public class Database {
         allAtoms.put("Og", new Atom(118, "Og", "Oganesson",294.0));
     }
 
-    public static HashMap<String, Atom> getAllAtoms() {
-        return allAtoms;
-    }
-
     public static boolean isValidAtom(String symbol) {
         return allAtoms.containsKey(symbol);
     }
@@ -170,10 +163,4 @@ public class Database {
         throw new InvalidAtomException("'" + atomicNumber + "'" + " is not a valid atomic number !");
     }
 
-    public static Database getInstance() {
-        if (database == null) {
-            database = new Database();
-        }
-        return database;
-    }
 }
