@@ -20,9 +20,9 @@ public class Sidebar extends JPanel {
 
 
     Color active_menu_color = new Color(255, 255, 153);
-    Font active_menu_font = new Font("Segoe UI", 1, 15);
+    Font active_menu_font = new Font("Segoe UI", Font.BOLD, 15);
     Color normal_menu_color = new Color(221, 221, 221);
-    Font normal_menu_font = new Font("Segoe UI", 1,  14);
+    Font normal_menu_font = new Font("Segoe UI", Font.BOLD,  14);
     Cursor pointer = new Cursor(Cursor.HAND_CURSOR);
 
 
@@ -93,13 +93,13 @@ public class Sidebar extends JPanel {
         menuHolder.setBackground(new Color(54, 33, 89));
         menuHolderScrollPane.setViewportView(menuHolder);
 
-        logoPanel.setFont(new Font("Segoe UI", 1, 24));
+        logoPanel.setFont(new Font("Segoe UI", Font.BOLD, 24));
         logoPanel.setForeground(new Color(221, 221, 221));
         logoPanel.setHorizontalAlignment(SwingConstants.CENTER);
         logoPanel.setText("ChemCal");
 
 
-        developer_sign_label.setFont(new Font("Segoe UI", 1, 12));
+        developer_sign_label.setFont(new Font("Segoe UI", Font.BOLD, 12));
         developer_sign_label.setForeground(new Color(221, 221, 221));
         developer_sign_label.setHorizontalAlignment(SwingConstants.CENTER);
         developer_sign_label.setText("Developed by - HumbleFooL");
@@ -112,19 +112,15 @@ public class Sidebar extends JPanel {
         menuHolder.setLayout(menuHolderLayout);
         GroupLayout.ParallelGroup parallelGroup = menuHolderLayout.createParallelGroup(GroupLayout.Alignment.LEADING);
 
-        menuPanels.forEach(eachPanel -> {
-            parallelGroup.addComponent(eachPanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE);
-        });
+        menuPanels.forEach(eachPanel -> parallelGroup.addComponent(eachPanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE));
 
 
         menuHolderLayout.setHorizontalGroup(parallelGroup);
 
         GroupLayout.SequentialGroup sequentialGroup = menuHolderLayout.createSequentialGroup();
 
-        menuPanels.forEach(eachPanel -> {
-            sequentialGroup.addComponent(eachPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, 0);
-        });
+        menuPanels.forEach(eachPanel -> sequentialGroup.addComponent(eachPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0));
 
         menuHolderLayout.setVerticalGroup(
                 menuHolderLayout.createParallelGroup(GroupLayout.Alignment.LEADING)

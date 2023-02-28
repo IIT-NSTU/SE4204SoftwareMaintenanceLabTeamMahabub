@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 
 public class HistoryFrame extends JFrame {
-    private static final Font SEGOE_UI = new Font("Segoe UI", 1, 14);
+    private static final Font SEGOE_UI = new Font("Segoe UI", Font.BOLD, 14);
     private static final Color MAIN_COLOR = new Color(64, 43, 100);
     private static final Color GRAY = new Color(204, 204, 204);
     
@@ -70,12 +70,12 @@ public class HistoryFrame extends JFrame {
     }
 
 
-    private void initComponents() throws IOException {
+    private void initComponents() {
         mainPanel.setBackground(Color.white);
         mainScrollPane.setBorder(null);
 
 
-        HistoryTextArea.setFont(new Font("Segoe UI", 0, 15));
+        HistoryTextArea.setFont(new Font("Segoe UI", Font.PLAIN, 15));
         HistoryTextArea.setLineWrap(true);
 
         clearButton.setBackground(MAIN_COLOR);
@@ -123,7 +123,7 @@ public class HistoryFrame extends JFrame {
     public void collectHistory() throws IOException {
         //sorting by date & time
         ArrayList<String> temp =new ArrayList<>();
-        Files.lines(Paths.get(filePath)).forEach(line ->temp.add(line));
+        Files.lines(Paths.get(filePath)).forEach(temp::add);
         if (temp.isEmpty()){
             clearButton.setVisible(false);
             return;

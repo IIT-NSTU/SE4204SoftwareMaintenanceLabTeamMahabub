@@ -35,12 +35,12 @@ public class ElectronConfigPanel extends JPanel {
     }
 
     private void initComponent() {
-        labelForNumOrSymbolTextfield.setFont(new Font("Segoe UI", 1, 14));
+        labelForNumOrSymbolTextfield.setFont(new Font("Segoe UI", Font.BOLD, 14));
         labelForNumOrSymbolTextfield.setForeground(new Color(64, 43, 100));
         labelForNumOrSymbolTextfield.setText("Enter Atomic Number or Symbol :");
 
         getElectronConfigButton.setBackground(new Color(64, 43, 100));
-        getElectronConfigButton.setFont(new Font("Segoe UI", 1, 14));
+        getElectronConfigButton.setFont(new Font("Segoe UI", Font.BOLD, 14));
         getElectronConfigButton.setForeground(new Color(204, 204, 204));
         getElectronConfigButton.setText("Get Config.");
         getElectronConfigButton.setAutoscrolls(true);
@@ -51,32 +51,32 @@ public class ElectronConfigPanel extends JPanel {
         ansPanel.setBorder(BorderFactory.createEtchedBorder());
         ansPanel.setVisible(false);
 
-        labelForAtomicMassAns.setFont(new Font("Segoe UI", 1, 14));
+        labelForAtomicMassAns.setFont(new Font("Segoe UI", Font.BOLD, 14));
         labelForAtomicMassAns.setForeground(new Color(204, 204, 204));
         labelForAtomicMassAns.setText("Atomic Mass :");
 
-        labelForAtomicNameAns.setFont(new Font("Segoe UI", 1, 14));
+        labelForAtomicNameAns.setFont(new Font("Segoe UI", Font.BOLD, 14));
         labelForAtomicNameAns.setForeground(new Color(204, 204, 204));
         labelForAtomicNameAns.setText("Atom Name :");
 
-        labelForAtomicNumAns.setFont(new Font("Segoe UI", 1, 14));
+        labelForAtomicNumAns.setFont(new Font("Segoe UI", Font.BOLD, 14));
         labelForAtomicNumAns.setForeground(new Color(204, 204, 204));
         labelForAtomicNumAns.setText("Atomic Number :");
 
-        labelForElectronConfigAns.setFont(new Font("Segoe UI", 1, 14));
+        labelForElectronConfigAns.setFont(new Font("Segoe UI", Font.BOLD, 14));
         labelForElectronConfigAns.setForeground(new Color(204, 204, 204));
         labelForElectronConfigAns.setText("Electron Config :");
 
-        atomicNumAnsLabel.setFont(new Font("Segoe UI", 1, 14));
+        atomicNumAnsLabel.setFont(new Font("Segoe UI", Font.BOLD, 14));
         atomicNumAnsLabel.setForeground(new Color(255, 255, 255));
 
-        atomicNameAnsLabel.setFont(new Font("Segoe UI", 1, 14));
+        atomicNameAnsLabel.setFont(new Font("Segoe UI", Font.BOLD, 14));
         atomicNameAnsLabel.setForeground(new Color(255, 255, 255));
 
-        ElectronConfigAnsLabel.setFont(new Font("Segoe UI", 1, 14));
+        ElectronConfigAnsLabel.setFont(new Font("Segoe UI", Font.BOLD, 14));
         ElectronConfigAnsLabel.setForeground(new Color(255, 255, 255));
 
-        massOfAtomAnsLabel.setFont(new Font("Segoe UI", 1, 14));
+        massOfAtomAnsLabel.setFont(new Font("Segoe UI", Font.BOLD, 14));
         massOfAtomAnsLabel.setForeground(new Color(255, 255, 255));
 
 
@@ -84,13 +84,13 @@ public class ElectronConfigPanel extends JPanel {
         errorMessagePanel.setVisible(false);
 
         errorMessageLabel.setBackground(new Color(255, 0, 0));
-        errorMessageLabel.setFont(new Font("Segoe UI", 1, 14));
+        errorMessageLabel.setFont(new Font("Segoe UI", Font.BOLD, 14));
         errorMessageLabel.setForeground(new Color(255, 255, 255));
         errorMessageLabel.setHorizontalAlignment(SwingConstants.CENTER);
 
 
         clearButton.setBackground(new Color(64, 43, 100));
-        clearButton.setFont(new Font("Segoe UI", 1, 14));
+        clearButton.setFont(new Font("Segoe UI", Font.BOLD, 14));
         clearButton.setForeground(new Color(204, 204, 204));
         clearButton.setText("Clear");
         clearButton.setAutoscrolls(true);

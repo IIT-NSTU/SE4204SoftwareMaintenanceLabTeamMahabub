@@ -37,38 +37,38 @@ public class NeedHelpPanel extends JPanel {
         contentHolderScrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         contentHolderScrollPane.setPreferredSize(new Dimension(787, 634));
 
-        eqBalanceHeaderLabel.setFont(new Font("Segoe UI", 1, 18)); // NOI18N
+        eqBalanceHeaderLabel.setFont(new Font("Segoe UI", Font.BOLD, 18)); // NOI18N
         eqBalanceHeaderLabel.setForeground(new Color(64, 43, 100));
         eqBalanceHeaderLabel.setIcon(new ImageIcon(getClass().getResource("/ChemistryCalculator/icons/icons8_document_header_30px_1.png"))); // NOI18N
         eqBalanceHeaderLabel.setText("Equation Balancer : ");
 
-        eqBalanceDesLabel.setFont(new Font("Segoe UI", 1, 14)); // NOI18N
+        eqBalanceDesLabel.setFont(new Font("Segoe UI", Font.BOLD, 14)); // NOI18N
         eqBalanceDesLabel.setForeground(new Color(102, 102, 102));
         eqBalanceDesLabel.setText("<html>\n1. Enter an equation of a chemical reaction and click 'Balance'.The answer will appear below.\n<br/>\n2. Always use the upper case for the first character in the element name and the lower case for the second character.\n<br/><br/>\n<pre>\n\tExamples:  Fe, Au, Co, Br, C, O, N, F.\n\tCompare: Co - cobalt and CO - carbon monoxide.\n</pre>\n<br/><br/>\n3. Compound states [like (s) (aq) or (g)] are not required.\n<br/>\n4. Both Reactants and Products fields are required.\n<br/>\n5. There's support 3 pattern of equation. Such as --\n<pre>\n\n\ti.   H2 + O2 = H2O\n\tii.  Zn + AgNO3 = Zn(NO3)2 +  Ag\n\tiii. CaHPO4*2H2O + NaOH + H2O = Na2HPO4*12H2O + Ca(OH)2 \n</pre>\n</html>");
 
-        concentrationHeaderLabel.setFont(new Font("Segoe UI", 1, 18)); // NOI18N
+        concentrationHeaderLabel.setFont(new Font("Segoe UI", Font.BOLD, 18)); // NOI18N
         concentrationHeaderLabel.setForeground(new Color(64, 43, 100));
         concentrationHeaderLabel.setIcon(new ImageIcon(getClass().getResource("/ChemistryCalculator/icons/icons8_document_header_30px_1.png"))); // NOI18N
         concentrationHeaderLabel.setText("Concentration : ");
 
-        mlrMass_elConfig_pOfComDes.setFont(new Font("Segoe UI", 1, 14)); // NOI18N
+        mlrMass_elConfig_pOfComDes.setFont(new Font("Segoe UI", Font.BOLD, 14)); // NOI18N
         mlrMass_elConfig_pOfComDes.setForeground(new Color(102, 102, 102));
         mlrMass_elConfig_pOfComDes.setText("<html> 1.The description of the compound pattern is similar to the description of the equation balance section. <br/> 2.Click the corresponding button to get the result. </html>");
 
-        mlrMass_elConfig_pOfComDesHeader.setFont(new Font("Segoe UI", 1, 18)); // NOI18N
+        mlrMass_elConfig_pOfComDesHeader.setFont(new Font("Segoe UI", Font.BOLD, 18)); // NOI18N
         mlrMass_elConfig_pOfComDesHeader.setForeground(new Color(64, 43, 100));
         mlrMass_elConfig_pOfComDesHeader.setIcon(new ImageIcon(getClass().getResource("/ChemistryCalculator/icons/icons8_document_header_30px_1.png"))); // NOI18N
         mlrMass_elConfig_pOfComDesHeader.setText("Molar mass, Electron config & Percent of completion: ");
 
-        concentrationDesLabel.setFont(new Font("Segoe UI", 1, 14)); // NOI18N
+        concentrationDesLabel.setFont(new Font("Segoe UI", Font.BOLD, 14)); // NOI18N
         concentrationDesLabel.setForeground(new Color(102, 102, 102));
         concentrationDesLabel.setText("<html> 1. Compound , compound's mass, volume of solution these 3 fields are required. \n <br/> 2. Equivalent number is required only for Normality. If you check Molarity and Molality in the format then this field should be blank. <br/> 3. Compound states [like (s) (aq) or (g)] are not required.\n <br/> 4. Click 'Get Concentration' button. The result will appear below.\n</html>");
 
-        titrationDesLabel.setFont(new Font("Segoe UI", 1, 14)); // NOI18N
+        titrationDesLabel.setFont(new Font("Segoe UI", Font.BOLD, 14)); // NOI18N
         titrationDesLabel.setForeground(new Color(102, 102, 102));
         titrationDesLabel.setText("<html> 1.The description of the compound pattern is similar to the description of the equation balance section. <br/> 2.The Number of moles of acid and base denotes the number of moles of acid or base that are required to neutralize each other.  For example --\n<pre>\t\n\n\tBalanced Equation : <u>1</u> Ba(OH)2  +  <u>2</u> HNO3 = 1 Ba(NO3)2  +  2 H2O\n\n\tHere,   \n\t        The Number of moles of acid = 2\n\t        The Number of moles of base = 1\n</pre>\n </html>");
 
-        titrationHeaderLabel.setFont(new Font("Segoe UI", 1, 18)); // NOI18N
+        titrationHeaderLabel.setFont(new Font("Segoe UI", Font.BOLD, 18)); // NOI18N
         titrationHeaderLabel.setForeground(new Color(64, 43, 100));
         titrationHeaderLabel.setIcon(new ImageIcon(getClass().getResource("/ChemistryCalculator/icons/icons8_document_header_30px_1.png"))); // NOI18N
         titrationHeaderLabel.setText("Titration: ");

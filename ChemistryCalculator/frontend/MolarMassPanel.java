@@ -11,7 +11,7 @@ import java.awt.event.ActionEvent;
 import java.util.Arrays;
 
 public class MolarMassPanel extends JPanel {
-    private static final Font SEGOE_UI = new Font("Segoe UI", 1,  14);
+    private static final Font SEGOE_UI = new Font("Segoe UI", Font.BOLD,  14);
     private static final Color MAIN_COLOR = new Color(64, 43,  100);
     private static final Color GRAY = new Color(204, 204,  204);
 
