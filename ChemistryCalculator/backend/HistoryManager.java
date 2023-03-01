@@ -1,16 +1,17 @@
 package ChemistryCalculator.backend;
 
 import javax.swing.filechooser.FileSystemView;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.PrintWriter;
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 
 public class HistoryManager {
 
     private File historyFile = null;
+    private String historyFilePath = null;
 
     public HistoryManager() {
         checkForHistoryFile();
@@ -20,6 +21,8 @@ public class HistoryManager {
         String historyFilePath = FileSystemView.getFileSystemView().getDefaultDirectory().getPath() + File.separator;
         String directoryName = historyFilePath.concat("Chemistry Calculator");
         String txtFile = "history.txt";
+
+        this.historyFilePath = historyFilePath + File.separator + txtFile;
 
         File directory = new File(directoryName);
         if (!directory.exists()) {
@@ -48,5 +51,25 @@ public class HistoryManager {
         writer.println(line.concat("    [" + DateTimeFormatter.ofPattern("HH:mm:ss, dd/MM/yyyy").format(LocalDateTime.now()) + "]"));
         writer.flush();
         writer.close();
+    }
+
+    public ArrayList<String> getHistory() {
+        ArrayList<String> historyList = new ArrayList<>();
+        try {
+            Files.lines(Paths.get(this.historyFilePath)).forEach(historyList::add);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        return historyList;
+    }
+
+    public void clearHistory() {
+        try {
+            PrintWriter writer = new PrintWriter(historyFile);
+            writer.print("");
+            writer.close();
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
