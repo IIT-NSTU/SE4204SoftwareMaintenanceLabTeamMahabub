@@ -3,6 +3,7 @@ package ChemistryCalculator.frontend;
 import ChemistryCalculator.backend.Converter;
 import ChemistryCalculator.backend.InsufficientDataException;
 import ChemistryCalculator.backend.Titration;
+import ChemistryCalculator.backend.TitrationProperties;
 
 import javax.swing.*;
 import java.awt.*;
@@ -305,7 +306,11 @@ public class TitrationPanel extends ContentPanel {
         String numOfMolesOfAcid = acidMoleTextfield.getText();
         String numOfMolesOfBase = baseMoleTextfield.getText();
 
-        Titration titration = new Titration(molarityOfAcid, molarityOfBase, volumeOfAcid, volumeOfBase, numOfMolesOfAcid, numOfMolesOfBase);
+
+        Titration titration = new Titration(
+                new TitrationProperties(molarityOfAcid, volumeOfAcid, numOfMolesOfAcid),
+                new TitrationProperties(molarityOfBase, volumeOfBase, numOfMolesOfBase)
+        );
 
         if (acidMolarityTextfield.getText().isEmpty()) {
             try {
