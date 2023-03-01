@@ -16,7 +16,7 @@ public class HistoryFrame extends JFrame {
     private final JButton clearButton = new JButton();
 
     private final HistoryManager historyManager = new HistoryManager();
-    public HistoryFrame() throws IOException {
+    public HistoryFrame() {
         initComponents();
         setComponentLayout();
         setFrameProperties();
