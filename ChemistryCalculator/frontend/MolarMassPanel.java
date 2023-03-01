@@ -50,25 +50,7 @@ public class MolarMassPanel extends ContentPanel {
         ansTable.setBorder(BorderFactory.createEtchedBorder());
         ansTable.setFont(SEGOE_UI);
         ansTable.setForeground(GRAY);
-        dataTableModel = new DefaultTableModel(
-                new Object[][]{},
-                new String[]{}
-        ) {
-            final Class[] types = new Class[]{
-                    String.class, String.class
-            };
-            final boolean[] canEdit = new boolean[]{
-                    false, false
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types[columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit[columnIndex];
-            }
-        };
+        dataTableModel = getCustomDataTableModel();
         ansTable.setModel(dataTableModel);
         ansTable.setRowHeight(50);
         ansTableScrollPane.setViewportView(ansTable);
@@ -119,6 +101,28 @@ public class MolarMassPanel extends ContentPanel {
         additionalText3.setForeground(MAIN_COLOR);
         additionalText3.setText("gram. Details are given below. ");
         additionalText3.setVisible(false);
+    }
+
+    private DefaultTableModel getCustomDataTableModel() {
+        return new DefaultTableModel(
+                new Object[][]{},
+                new String[]{}
+        ) {
+            final Class[] types = new Class[]{
+                    String.class, String.class
+            };
+            final boolean[] canEdit = new boolean[]{
+                    false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types[columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit[columnIndex];
+            }
+        };
     }
 
     private void setComponentLayout() {
@@ -202,7 +206,7 @@ public class MolarMassPanel extends ContentPanel {
         );
     }
 
-    private void molarMassButtonActionPerformed(ActionEvent evt) {
+    private void molarMassButtonActionPerformed(ActionEvent event) {
         String compoundText = compoundTextfield.getText();
         if (!compoundText.isEmpty()) {
             Compound compound;
@@ -251,9 +255,9 @@ public class MolarMassPanel extends ContentPanel {
         }
     }
 
-    private void molerMassClearButtonActionPerformed(ActionEvent evt) {
+    private void molerMassClearButtonActionPerformed(ActionEvent event) {
         errorMessagePanel.setVisible(false);
-        compoundTextfield.setText(null);
+        compoundTextfield.setText("");
         additionalText1.setVisible(false);
         compoundAnsLabel.setVisible(false);
         additionalText2.setVisible(false);
