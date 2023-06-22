@@ -3,7 +3,7 @@ This repository contains the SE4204 course materials. The forked project is used
 Some of the documents that are created 
 - [SRS Report](docs/Report-on-SRS-for-Chemistry-Calculator_03_05_06_15_27.pdf)
 - [SRS Document](docs/Final_SRS_03_05_06_15_27.pdf)
-- [Refactoring Report](Refactoring_Report_03_05_06_15_27.pdf)
+- [Refactoring Report](docs/Refactoring_Report_03_05_06_15_27.pdf)
 
 # Chemistry Calculator
 Its a desktop based application which  provides facility for solving  equations and problems related to Electron Combination, Molarity, Mass, Percent of Composition, Balance Reaction, molecular mass, titration setup etc
